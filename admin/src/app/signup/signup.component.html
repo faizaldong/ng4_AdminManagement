@@ -1,0 +1,166 @@
+<!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <ngb-alert *ngIf="showalertsignup" type="warning" (click)="closealertsignup()"><label *ngFor="let e of erroralerttext">{{e}}</label></ngb-alert>
+    <div id="main-wrapper">
+      <div class="table-row">
+        <div class="signup-form">
+          <div class="signup-form-container">
+            <img src="assets/images/logo-signup.png" alt="Logo">
+            <div class="gap-md"></div>
+            <h2 class="thin">BEGIN YOUR FREE 30 DAYS TRIAL</h2>
+            <p style="color:#A8A8A8">Try TaskkMe for FREE with unlimited devices for 30 days then decide how many devices works best for your business.</p>
+
+            <label for="">Your Name</label>
+            <div [ngClass]="{'has-warning': nameinvalid}">
+              <input type="text" class="form-control" name="first_name" [(ngModel)]="signup.admins[0].first_name">
+              <div class="form-control-feedback" *ngIf="nameinvalid">{{nameerrortext}}</div>
+            </div>
+
+            <label for="">Password</label>
+            <div class="password-container" [ngClass]="{'has-warning': passwordinvalid}">
+              <input type="{{passwordtype}}" class="form-control" name="password" [(ngModel)]="signup.admins[0].password">
+              <button type="button" (click)="hidepassword()" class="toggle-password" name="button"><i class="{{passwordicon}}"></i><!-- <i class="fa fa-eye hide"></i> --></button>
+              <div class="form-control-feedback" *ngIf="passwordinvalid">{{passworderrortext}}</div>
+            </div>
+
+            <label for="">Your Email</label>
+            <div class="password-container" [ngClass]="{'has-warning': emailinvalid}">
+              <input type="email" class="form-control" name="email" [(ngModel)]="signup.admins[0].email">
+              <div class="form-control-feedback" *ngIf="emailinvalid">{{emailerrortext}}</div>
+            </div>
+
+            <label for="">Company Name</label>
+            <div class="password-container" [ngClass]="{'has-warning': companynameinvalid}">
+              <input type="text" class="form-control" name="company_name" [(ngModel)]="signup.company_name">
+              <div class="form-control-feedback" *ngIf="companynameinvalid">{{companynameerrortext}}</div>
+            </div>  
+
+            <label for="">Company Phone No.</label>
+            <div class="password-container" [ngClass]="{'has-warning': contactnoinvalid}">
+              <input type="text" class="form-control" name="contact_no" [(ngModel)]="signup.contact_no">
+              <div class="form-control-feedback" *ngIf="contactnoinvalid">{{contactnoerrortext}}</div>
+            </div>
+
+            <label for="">Company Registration No.</label>
+            <div class="password-container" [ngClass]="{'has-warning': companyregnoinvalid}">
+              <input type="text" class="form-control" name="contact_no" [(ngModel)]="signup.company_registration_no">
+              <div class="form-control-feedback" *ngIf="companyregnoinvalid">{{companyregerrortext}}</div>
+            </div>
+
+            <button [disabled]="disabledbutton" type="button" class="btn waves-effect waves-light" name="button" (click)="signupsubmit()">SIGN UP AND START TASKKME &nbsp;&nbsp; <i class="fa fa-angle-right"></i></button>
+          </div>
+          <div class="col-sm-12 text-center">
+                        Already have an account? <a class="text-info m-l-5" (click)="haveaccount()"><b>Sign In</b></a>
+                    </div>
+        </div>
+        <div class="marketing-container">
+
+          <div class="marketing-header">
+            <h1 class="thin">TRY IT AS IF YOU OWN IT</h1>
+            <h3>Get full features for 30 days, no credit card required!</h3>
+            <div class="gap-md"></div>
+            <div class="gap-md d-none d-sm-block"></div>
+            <p>TaskkMe's feature will always be available to you. No locked features, no limitation. All you need to do is at least subscribe to one device to continue using our service upon trial expiration.</p>
+          </div>
+
+          <div class="marketing-body">
+            <h1 class="thin section-title">MAKE THE BEST OUT OF 30 DAYS TRIAL</h1>
+
+            <p class="mt40">To fully utilize TaskkMe's feature within the trial period</p>
+
+            <div class="row mt60 feature-list">
+              <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                <img src="assets/images/icons/cms/job.png" alt="Create Job" class="mb20">
+                <h4 class="capital">create job</h4>
+                <p>No limits to job creation. Create as much as you like.</p>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                <img src="assets/images/icons/cms/resources.png" alt="Assign Jobs" class="mb20">
+                <h4 class="capital">assign jobs</h4>
+                <p>Assign your bulk jobs to drivers automatically.</p>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                <img src="assets/images/icons/cms/customization.png" alt="Customize Forms" class="mb20">
+                <h4 class="capital">customize forms</h4>
+                <p>Create your custom labels and custom fields that suits you.</p>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                <img src="assets/images/icons/cms/tracking.png" alt="Track Drivers" class="mb20">
+                <h4 class="capital">track drivers</h4>
+                <p>Track as many drivers as you have them registered with TaskkMe.</p>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                <img src="assets/images/icons/cms/mobile.png" alt="Mobile Application" class="mb20">
+                <h4 class="capital">mobile application</h4>
+                <p>Get your drivers to do their work with our mobile app.</p>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                <img src="assets/images/icons/cms/report.png" alt="Generate Report" class="mb20">
+                <h4 class="capital">generate report</h4>
+                <p>Produce reports of your drivers and customers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /#main-wrapper -->
+
+
+    <style>
+      body{background-color: #FFF;}
+      body *{font-family:'Lato', sans-serif}
+
+      label{margin-top: 25px;}
+      button.btn{background-color: #4C84BF;color: #fff;height:50px;margin-top: 30px;width: 100%;font-size: 16px}
+      .form-control{height: 45px}
+
+      #main-wrapper{display: table;}
+      #main-wrapper > div{display: table-row;}
+      #main-wrapper > div > div{display: table-cell;vertical-align: top;}
+
+      .signup-form{width:450px;background-color: #fff;padding:40px 35px;-webkit-box-shadow: 0 0 30px 0 rgba(0,0,0,.2);box-shadow: 0 0 30px 0 rgba(0,0,0,.2);position: relative;}
+      .signup-form .password-container{position: relative;}
+      .signup-form .password-container button.toggle-password{position: absolute;background-color: transparent;color: #ACACAC;border: none;top:10px;right:10px}
+
+      .marketing-container{text-align: center;}
+
+      .marketing-container .marketing-header{background: url('assets/images/photos/signup.jpg') center center no-repeat;background-size: cover;color:#fff;padding:130px 90px;}
+      .marketing-container .marketing-header h1, .marketing-container .marketing-header h3{color:#fff;}
+      .marketing-container .marketing-header p{max-width:680px;margin:auto;font-size: 16px;}
+
+      .marketing-container .marketing-body{background-color: #F8F8F8;padding:60px 50px;}
+      .marketing-container .marketing-body .feature-list > div{border-right: 1px solid #DFDFDF;margin-bottom: 40px;}
+      .marketing-container .marketing-body .feature-list > div:nth-child(3n){border-right: none}
+
+      .section-title:after{content: '';display:block;height:1px;width:70px;background-color: #4C84BF;margin:20px auto 0 auto}
+
+      @media screen and (max-width:1199px) and (min-width:992px){
+        .marketing-container .marketing-body .feature-list > div{border-right: 1px solid #DFDFDF !important;}
+        .marketing-container .marketing-body .feature-list > div:nth-child(2n){border-right: none !important}
+      }
+
+      @media screen and (max-width:991px){
+        #main-wrapper, #main-wrapper > div, #main-wrapper > div > div{display: block;}
+        .signup-form, .marketing-container{width: 100%}
+        .signup-form-container{width: 400px;max-width: 100%;margin: auto;}
+      }
+
+      @media screen and (max-width:767px) {
+        .marketing-container .marketing-header{padding:70px 50px}
+        p{font-size: 16px;}
+        .signup-form .password-container button.toggle-password{width: auto;top:0;right:8px;}
+      }
+
+      @media screen and (max-width:767px) and (min-width:576px){
+        .marketing-container .marketing-body .feature-list > div{border-right: 1px solid #DFDFDF !important;}
+        .marketing-container .marketing-body .feature-list > div:nth-child(2n){border-right: none !important}
+      }
+
+      @media screen and (max-width:575px){
+        .marketing-container .marketing-body .feature-list > div{border-right: none !important}
+      }
+
+
+
+
+    </style>

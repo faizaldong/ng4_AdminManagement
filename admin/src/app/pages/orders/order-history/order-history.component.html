@@ -1,0 +1,122 @@
+<div class="container-fluid r-aside">
+
+
+
+
+  <!-- Full width column card -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex no-block">
+            <h4 class="bold">List of receipts</h4>
+          </div>
+
+
+          <!-- Dengan penuh harapan, saya harap element ini dapat masuk html ni dlm table TD kendo -->
+          <!--
+          /)
+          //
+          __*_             //
+          /-(____)           //
+          ////0 0|\          //
+          ,_/// \ w/|\_        //
+          /  \\   |||  ;       //
+          /____\....::./\      //
+          _/__/#\_ _,,_/__\    //
+          /___/#########\/""-(\</
+          /__/ '######### ""^(/</
+          /__/   ,)))=:= (,   //.
+          ,__\   /Q...... /.  (/
+          .Q....../..\
+          /.Q ..../...\
+          /......./.....\
+          /...../  \.....\
+          /_.._./   \..._\
+          (` )      (` )
+          | /        \ |
+          '(          )'
+          /+|          |+\
+          |,/          \,/
+        -->
+
+        <div class="kendo-table mt20">
+          <!-- <table class="table table-striped">
+            <tr>
+              <th>Order Number</th>
+              <th>Order Date</th>
+              <th>Total Payment</th>
+              <th>Order Status</th>
+              <th>Actions</th>
+            </tr>
+            <tr>
+              <td><a href="order-details.php" class="bold">AHGGWP20171106K</a></td>
+              <td>6 November 2017</td>
+              <td>$504</td>
+              <td><span class="status-active">&#9679;</span> Active</td>
+              <td class="kendo-action">
+                <button routerLink="/payment-success" [routerLinkActive]="['router-link-active']" class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Order Deatils"><i class="fa fa-file-text"></i></button>
+                <button class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Print PDF"><i class="fa fa-print"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td><a href="order-details.php" class="bold">LEL0MG20171104L</a></td>
+              <td>4 November 2017</td>
+              <td>$28</td>
+              <td><span class="status-disabled">&#9679;</span> Failed</td>
+              <td class="kendo-action">
+                <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Order Deatils"><i class="fa fa-file-text"></i></button>
+                <button class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Print PDF"><i class="fa fa-print"></i></button>
+              </td>
+            </tr>
+          </table> -->
+
+          <kendo-grid 
+            [kendoGridBinding]="orderhistory" 
+            [pageSize]="20"
+            [pageable]="true" 
+            [sortable]="true" 
+            [filter]="filter"
+            [skip]=0
+            [groupable]="false" 
+            [height]="510"
+            (pageChange)="pageChange($event)"
+            [kendoGridSelectBy]="'id'"
+            [selectable]="{enabled:false, checkboxOnly:true}"
+            (selectedKeysChange)="checkboxes($event)"
+            >
+            <kendo-grid-column field="paypal_payment_id" title="Receipt Number">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <a href="javascript:;" class="bold"><font color="#99CCFF">{{dataItem.paypal_payment_id}}</font></a>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="payment_made_date" title="Payment Date">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{dataItem.payment_made_date| date: 'dd MMMM yyyy'}}
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="payment_amount" title="Total Payment" width="130">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                $ {{dataItem.payment_amount}}
+              </ng-template>
+            </kendo-grid-column>
+            <!-- <kendo-grid-column field="payment_status" title="Order Status" width="130">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <span class="status-active" [ngClass]="dataItem.payment_status=='approved'? 'status-active':'status-disabled'">&#9679;</span> {{dataItem.payment_status=='approved'? 'Active':'Failed'}}
+              </ng-template>
+            </kendo-grid-column> -->
+            <kendo-grid-column field="id" title="Actions" class="kendo-action" width="100">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <button *ngIf="havepermshow" class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Order Details" (click)="orderdetails(dataItem)"><i class="fa fa-file-text"></i></button>
+                <button *ngIf="havepermshow" class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Print PDF" (click)="printpdf(dataItem)"><i [ngClass]="iconprint"></i></button>
+              </ng-template>
+            </kendo-grid-column>
+          </kendo-grid>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+
+</div><!-- /.container-fluid -->

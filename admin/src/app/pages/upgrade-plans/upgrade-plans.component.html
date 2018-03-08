@@ -1,0 +1,378 @@
+<a routerLink="/dashboard" class="back-to-plans"><i class="fa fa-angle-left"></i>&nbsp; Back<span class="hidden-sm-down"> to Dashboard</span></a>
+
+<!-- Center logo -->
+<div class="payment-logo-container">
+  <img src="assets/images/logo-light-text.png" alt="" class="center hidden-md-up">
+  <img src="assets/images/logo-text.png" alt="" class="center hidden-sm-down">
+</div>
+
+<div class="container-fluid r-aside">
+
+  <div class="container">
+    <!-- Full width column card -->
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <div class="card" *ngFor="let app of apps; let i=index">
+          <div class="card-body" *ngIf="app.plans?.length > 0">
+            <div class="d-flex no-block nav-tabs-pills">
+              <h2 class="plan-title"><img src="assets/images/icon/icon-{{app.application_registration.name| lowercase}}.png" alt="{{app.application_registration.name}}"> {{app.application_registration.name=='WMS'? 'Warehouse Management System': ''}} {{app.application_registration.name=='LDS'? ' Logistic Delivery System': ''}} {{app.application_registration.name=='AUTH'? 'Admin Panel System': ''}} {{app.application_registration.name=='Combo'? 'Multiple Access System': ''}} ({{app.application_registration.name}}) ({{app.application_registration.id}}) </h2>
+
+              <div class="ml-auto">
+                <ul class="nav nav-pills mt10">
+                  <li class="nav-item"><a href="#lds-monthly" class="nav-link" [ngClass]="{'active': app.paymenttype=='Monthly'}" data-toggle="tab" aria-expanded="true" (click)="paymenttype(app.application_registration.name, apps, 'Monthly')">Monthly</a> </li>
+                  <li class="nav-item"><a href="#lds-annually" class="nav-link" [ngClass]="{'active': app.paymenttype=='Anually'}" data-toggle="tab" aria-expanded="false" (click)="paymenttype(app.application_registration.name, apps, 'Anually')">Annual</a> </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tab-content mt30">
+              <div id="lds-monthly" class="tab-pane active" aria-expanded="true">
+                <div class="row">
+
+                  <div class="col-12 col-sm-6 col-lg-3" *ngFor="let plan of app.plans">
+                    <div class="pricing-column" >
+                      <div class="corner-ribbon shadow" [ngClass]="{'top-left black': plan.plan_name=='BASIC', 'top-right popular': plan.plan_name=='PRO'}" >{{plan.plan_name=='BASIC'? 'Current':''}} {{plan.plan_name=='PRO'? 'Popular':''}}</div>
+                      <div class="pricing-column-content" [ngClass]="{'popular': plan.plan_name=='PRO'}">
+                        <h5> {{plan.plan_name}} <!-- {{plan.id}} --> </h5>
+                        <div *ngIf="plan.plan_name!=='ENTERPRISE'" > 
+                          <p class="price"><sup>$</sup>{{plan.price}}<sub class="montserrat">/month</sub></p>
+                          <p class="discount">&nbsp;</p>
+                          <p><b>{{plan.allowed_device}}</b> Device</p>
+                          <p><b>{{plan.job_limit_per_day}}</b> jobs/day</p>
+                          <!-- <p>{{plan.plan_frequency.name}} ({{plan.id}})</p> -->
+                        </div>
+                        <p *ngIf="plan.plan_name=='ENTERPRISE'" class="enterprise-p">Contact us if you're a large team and you'd like to have custom features, pricing and more!</p>
+                        <!-- <p *ngIf="plan.plan_name=='ENTERPRISE'">{{plan.plan_frequency.name}}</p> -->
+                        <div class="gap"></div>
+                        <button *ngIf="plan.selected==false" class="btn btn-md " [ngClass]="(plan.plan_name=='PRO')?'btn-outline-green':'btn-outline-oceanblue'" [disabled]="plan.plan_name=='BASIC'" (click)="addorcontactaction(i, apps, plan)">{{plan.plan_name=='ENTERPRISE'? 'Contact Us': 'Add to Plan'}}</button>
+                        <button *ngIf="plan.selected" class="btn btn-md " [ngClass]="(plan.plan_name=='PRO')?'btn-green':'btn-oceanblue'"><i class="fa fa-check-circle"></i>&nbsp; Plan Selected</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block nav-tabs-pills">
+              <h2 class="plan-title"><img src="assets/images/icon/icon-lds.png" alt="LDS"> Logistics Delivery System (LDS)</h2>
+
+              <div class="ml-auto">
+                <ul class="nav nav-pills mt10">
+                  <li class="nav-item"><a href="#lds-monthly" class="nav-link" data-toggle="tab" aria-expanded="true" (click)="paymenttype('Monthly')">Monthly</a> </li>
+                  <li class="nav-item"><a href="#lds-annually" class="nav-link active" data-toggle="tab" aria-expanded="false" (click)="paymenttype('Anually')">Annual</a> </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tab-content mt30">
+
+              <div id="lds-monthly" class="tab-pane" aria-expanded="true">
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-left black shadow">Current</div>
+                      <div class="pricing-column-content">
+                        <h5>Basic</h5>
+                        <p class="price"><sup>$</sup>0<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>1</b> Device</p>
+                        <p><b>30</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue disabled">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content">
+                        <h5>Standard</h5>
+                        <p class="price"><sup>$</sup>25<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>5</b> Devices</p>
+                        <p><b>100</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-right popular shadow">Popular</div>
+                      <div class="pricing-column-content popular">
+                        <h5>Pro</h5>
+                        <p class="price"><sup>$</sup>50<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>20</b> Devices</p>
+                        <p><b>500</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-green waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content enterprise">
+                        <h5>Enterprise</h5>
+                        <p class="enterprise-p">Contact us if you're a large team and you'd like to have custom features, pricing and more!</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Contact Us</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="lds-annually" class="tab-pane active" aria-expanded="false">
+                <div class="row">
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-left black shadow">Current</div>
+                      <div class="pricing-column-content">
+                        <h5>Basic</h5>
+                        <p class="price"><sup>$</sup>0<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>1</b> Device</p>
+                        <p><b>30</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue disabled">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content">
+                        <h5>Standard</h5>
+                        <p class="price"><sup>$</sup>20<sub class="montserrat">/month</sub></p>
+                        <p class="discount">Save $24 a year</p>
+                        <p><b>5</b> Devices</p>
+                        <p><b>100</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-oceanblue waves-effect waves-light"><i class="fa fa-check-circle"></i>&nbsp; Plan Selected</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-right popular shadow">Popular</div>
+                      <div class="pricing-column-content popular">
+                        <h5>Pro</h5>
+                        <p class="price"><sup>$</sup>45<sub class="montserrat">/month</sub></p>
+                        <p class="discount">Save $40 a year</p>
+                        <p><b>20</b> Devices</p>
+                        <p><b>500</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-green waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content enterprise">
+                        <h5>Enterprise</h5>
+                        <p class="enterprise-p">Contact us if you're a large team and you'd like to have custom features, pricing and more!</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Contact Us</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <h2 class="plan-title mt20">LDS Extensions</h2>
+            <div class="row">
+              <div class="col-lg-4">
+                <h3 class="extension-title hidden-lg-up">APPTIMICE</h3>
+                <img src="http://via.placeholder.com/830x420" alt="" class="full-width">
+              </div>
+              <div class="col-lg-5 col-md-8 col-sm-7">
+                <h3 class="extension-title hidden-md-down">APPTIMICE</h3>
+                <div class="gap hidden-lg-up"></div>
+                <p class="mb20">Compress your jobs and drivers to give you the best route to be taken and get the job done more efficiently!</p>
+                <p><i class="fa fa-check text-success"></i> Shortest delivery route</p>
+                <p><i class="fa fa-check text-success"></i> Less drivers assigned to</p>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-5 pricing-column-content no-border text-center">
+                <p class="price"><sup>$</sup>20<sub class="montserrat">/month</sub></p>
+                <p class="discount">Save $24 a year</p>
+                <div class="gap"></div>
+                <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Add to Plan</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block nav-tabs-pills">
+              <h2 class="plan-title"><img src="assets/images/icon/icon-wms.png" alt="WMS"> Warehouse Management System (WMS)</h2>
+
+              <div class="ml-auto">
+                <ul class="nav nav-pills mt10">
+                  <li class="nav-item"><a href="#wms-monthly" class="nav-link" data-toggle="tab" aria-expanded="true">Monthly</a> </li>
+                  <li class="nav-item"><a href="#wms-annually" class="nav-link active" data-toggle="tab" aria-expanded="false">Annual</a> </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tab-content mt30">
+
+              <div id="wms-monthly" class="tab-pane" aria-expanded="true">
+                <div class="row">
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-left black shadow">Current</div>
+                      <div class="pricing-column-content">
+                        <h5>Basic</h5>
+                        <p class="price"><sup>$</sup>0<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>1</b> Device</p>
+                        <p><b>30</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue disabled">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content">
+                        <h5>Standard</h5>
+                        <p class="price"><sup>$</sup>25<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>5</b> Devices</p>
+                        <p><b>100</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-right popular shadow">Popular</div>
+                      <div class="pricing-column-content popular">
+                        <h5>Pro</h5>
+                        <p class="price"><sup>$</sup>50<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>20</b> Devices</p>
+                        <p><b>500</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-green waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content enterprise">
+                        <h5>Enterprise</h5>
+                        <p class="enterprise-p">Contact us if you're a large team and you'd like to have custom features, pricing and more!</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Contact Us</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="wms-annually" class="tab-pane active" aria-expanded="false">
+                <div class="row">
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-left black shadow">Current</div>
+                      <div class="pricing-column-content">
+                        <h5>Basic</h5>
+                        <p class="price"><sup>$</sup>0<sub class="montserrat">/month</sub></p>
+                        <p class="discount">&nbsp;</p>
+                        <p><b>1</b> Device</p>
+                        <p><b>30</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue disabled">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content">
+                        <h5>Standard</h5>
+                        <p class="price"><sup>$</sup>20<sub class="montserrat">/month</sub></p>
+                        <p class="discount">Save $24 a year</p>
+                        <p><b>5</b> Devices</p>
+                        <p><b>100</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="corner-ribbon top-right popular shadow">Popular</div>
+                      <div class="pricing-column-content popular">
+                        <h5>Pro</h5>
+                        <p class="price"><sup>$</sup>45<sub class="montserrat">/month</sub></p>
+                        <p class="discount">Save $40 a year</p>
+                        <p><b>20</b> Devices</p>
+                        <p><b>500</b> jobs/day</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-green waves-effect waves-light">Add to Plan</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="pricing-column">
+                      <div class="pricing-column-content enterprise">
+                        <h5>Enterprise</h5>
+                        <p class="enterprise-p">Contact us if you're a large team and you'd like to have custom features, pricing and more!</p>
+                        <div class="gap"></div>
+                        <button class="btn btn-md btn-outline-oceanblue waves-effect waves-light">Contact Us</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div>
+
+
+  <div *ngIf="enablecheckout" class="checkout-bar animate">
+    <div class="col-12 text-right">
+      <!-- <span class="d-inline-block"><i class="fa fa-check-circle"></i> 2 items selected</span> -->
+      <!-- <a href="payment.php" class="btn btn-green waves-effect btn-md waves-light">Proceed to checkout</a> -->
+      <!-- <a href="javascript:;" class="btn btn-green waves-effect btn-md waves-light" (click)="checkout()">Checkout with <b>{{checkoutot}} items</b></a> -->
+      <a href="javascript:;" class="btn btn-green waves-effect btn-md waves-light" (click)="checkout()">Proceed to checkout</a>
+    </div>
+  </div>
+
+</div><!-- /.container-fluid -->

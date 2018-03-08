@@ -1,0 +1,81 @@
+<div class="form-container">
+  <!-- Image Uploader -->
+  <div class="row">
+    <div class="col-md-8 offset-md-4">
+      <img src="assets/images/users/mobile-grey.png" width="200" height="200" alt="">
+      <div class="gap"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8 text-md-left">
+      <ngb-alert *ngIf="showdevicealert" type="{{devicealert.type}}" (click)="closeAlertLogin()">{{devicealert.message}}</ngb-alert>
+    </div>
+  </div>
+
+  <!-- Device Id -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Device Id</label>
+    </div>
+    <div class="col-md-8">
+      <input type="text" class="form-control form-control-warning" placeholder="required" [(ngModel)]="device.device_id">
+    </div>
+  </div>
+
+  <!-- Current Worker -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Current Worker</label>
+    </div>
+    <div class="col-md-8">
+      <select class="form-control" [(ngModel)]="device.current_worker_id">
+        <option value="">Select Worker</option>
+        <option *ngFor="let worker of workers" value="{{worker.id}}">{{worker.first_name}}</option>
+      </select>
+      <!-- <input type="email" class="form-control form-control-warning" placeholder="required" [(ngModel)]="device.current_worker_id"> -->
+    </div>
+  </div>
+
+  <!-- Last Worker -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Last Worker</label>
+    </div>
+    <div class="col-md-8">
+      <select class="form-control" [(ngModel)]="device.last_worker_id">
+        <option value="">Select Worker</option>s
+        <option *ngFor="let worker of workers" value="{{worker.id}}">{{worker.first_name}}</option>
+      </select>
+      <!-- <input type="email" class="form-control form-control-warning" placeholder="required" [(ngModel)]="device.last_worker_id"> -->
+    </div>
+  </div>
+
+
+  <!-- Submit Button -->
+  <div class="row">
+    <div class="col-md-4 text-md-right"></div>
+    <div class="col-md-8">
+      <button class="btn btn-green btn-md" (click)="createDevice()" [disabled]="editDisable">Save Changes</button>
+      <div class="gap-sm"></div>
+      <!-- <p class="footnote">An email will be sent to this user about their account.</p> -->
+    </div>
+  </div>
+
+</div><!-- /.form-container -->
+
+<!-- IMPORTANT NOTES : can be declared globally as standby to use anytime without have to import one by one, waiting faizal to decide -->
+  <!-- JS Bootstrap Popper Core -->
+  <!-- <script src="assets/plugins/bootstrap/js/popper.min.js"></script> -->
+  <!-- <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
+  <!-- SlimScrollBar JS -->
+  <!-- <script src="assets/js/perfect-scrollbar.jquery.min.js"></script> -->
+  <!--Wave Effects -->
+  <!-- <script src="assets/js/waves.js"></script> -->
+  <!--Menu sidebar -->
+  <!-- <script src="assets/js/sidebarmenu.js"></script> -->
+  <!--Custom JavaScript -->
+  <!-- <script src="assets/js/custom.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css"> -->
+  <!-- <script type="text/javascript" src="assets/plugins/select2/dist/js/select2.min.js"></script> -->

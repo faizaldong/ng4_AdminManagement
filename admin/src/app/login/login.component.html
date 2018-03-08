@@ -1,0 +1,71 @@
+<div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
+    <div class="login-box card">
+        <div class="card-body">
+            <!-- <form class="form-horizontal form-material" id="loginform" (keyup.enter)="Login()"> -->
+            <form class="form-horizontal" id="loginform" (ngSubmit)="SignIn()">
+                <ngb-alert *ngIf="alertLoginOpen" type="{{alert.type}}" (click)="closeAlertLogin()">{{alert.message}}</ngb-alert>
+                <h3 class="box-title m-b-20">Sign in</h3>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="username" type="email" placeholder="Username" required [(ngModel)]="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="password" type="password" placeholder="Password" required  [(ngModel)]="password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div *ngIf="false" class="checkbox checkbox-info pull-left p-t-0">
+                            <input id="checkbox-signup" [(ngModel)]="remember" name="remember" type="checkbox" class="filled-in chk-col-light-blue">
+                            <label for="checkbox-signup"> Remember me </label>
+                        </div> <a href="javascript:void(0)" id="to-recover" class=" pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <div class="col-xs-12 p-b-20">
+                        <!-- <a class="btn btn-block btn-lg btn-info btn-rounded" [routerLink]="['/starter']">Log In</a> -->
+                        <button [disabled]="loginClicked" class="btn btn-block btn-lg btn-info" type="submit">{{logintext}}</button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="false">
+                    <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                        <div class="social">
+                            <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
+                            <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        Don't have an account? <a class="text-info m-l-5" [routerLink]="['/signup']"><b>Sign Up</b></a>
+                    </div>
+                </div>
+            </form>
+                
+            <form class="form-horizontal" id="recoverform" (ngSubmit)="Reset()">
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <ngb-alert *ngIf="alertRecoverPasswordOpen" type="{{alert.type}}" (click)="closeAlertRecoverPassword()">{{alert.message}}</ngb-alert>
+                        <h3>Recover Password</h3>
+                        <p class="text-muted">Enter your Email and instructions will be sent to your email. </p>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="email" placeholder="Email" name="email" [(ngModel)]="email"> </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <!-- <a class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Reset</a> -->
+                        <button [hidden]="reset" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                        <button [hidden]="resetClicked" [disabled]="true" class="btn btn-block btn-lg btn-rounded" >Reset</button>
+                    </div>
+                </div>
+                <!-- <a href="javascript:void(0)" id="to-login" class=" pull-right"><i class="fa fa-user" aria-hidden="true"></i> Have account?</a> -->
+                <a href="javascript:void(0)" id="to-login" class=" pull-right">Have account?</a>
+            </form>
+        </div>
+    </div>
+</div>

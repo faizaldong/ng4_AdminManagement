@@ -1,0 +1,128 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <li class="nav-small-cap">SERVICES</li>
+        <li *ngFor="let service of menuservices" title="{{!service.is_true? 'Service not available. Please upgrade your plan.':''}}">
+          <a href="javascript:;" [class.disabled]="!service.is_true" class="waves-effect waves-dark nav-services" [class.has-lock]="!service.is_true" aria-expanded="false" (click)="redirectportal(service.name)"><i>
+            <img src="assets/images/navigations/icon-{{service.name| lowercase}}.png" alt="{{service.name}} icon"></i><span class="hide-menu">{{service.name=='AUTH'? 'ADMIN':service.name}}</span>
+          </a>
+        </li>
+
+        <!-- <li><a routerLink="/lds-app" [routerLinkActive]="['router-link-active']" class="waves-effect waves-dark nav-services" aria-expanded="false"><i><img src="assets/images/navigations/icon-lds.png" alt="LDS icon"></i><span class="hide-menu">LDS</span></a></li>
+        <li><a routerLink="/wms-app" [routerLinkActive]="['router-link-active']" class="has-lock waves-effect waves-dark nav-services" data-toggle="tooltip" data-placement="right" title="" data-original-title="Service not available. Please upgrade your plan." aria-expanded="false">
+          <i><img src="assets/images/navigations/icon-wms.png" alt="WMS icon"></i><span class="hide-menu">WMS</span>
+        </a></li> -->
+
+        <li class="hidden-mini-sidebar"><div class="gap"></div></li>
+
+        <li class="nav-small-cap">MODULES</li>
+        <li> <a routerLink="/dashboard"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+        <li><a class="has-arrow waves-effect waves-dark" href="javascript:;" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Accounts</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a routerLink="/all-accounts">All Accounts</a></li>
+                <li><a routerLink="/add-accounts">Add Account</a></li>
+                <li><a routerLink="/all-roles">All Roles</a></li>
+                <li><a routerLink="/add-role">Add Role</a></li>
+                <!-- <li><a routerLink="/activity-log">Activity Log</a></li> -->
+            </ul>
+        </li>
+        <li> <a routerLink="/all-devices"><i class="fa fa-mobile nav-mobile-fix"></i><span class="hide-menu">Devices</span></a></li>
+
+        <li class="hidden-mini-sidebar"><div class="gap"></div></li>
+        <li class="hidden-mini-sidebar"><div class="gap"></div></li>
+
+        <!-- <li class="nav-small-cap">THEMEFOREST ADMIN PRO</li>
+        <li class="user-profile">
+          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs </span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a href="javascript:void()">My Profile </a></li>
+            <li><a href="javascript:void()">My Balance</a></li>
+            <li><a href="javascript:void()">Inbox</a></li>
+            <li><a href="javascript:void()">Account Setting</a></li>
+            <li><a href="javascript:void()">Logout</a></li>
+          </ul>
+        </li>
+        <li class="nav-devider"></li> -->
+        
+        <!-- <li>
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">KENDO</span></a>
+            <ul aria-expanded="false" class="collapse">
+              <li><a routerLink="/kendo" [routerLinkActive]="['router-link-active']">basic kendo</a></li>
+            </ul>
+        </li>
+        <li>
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Observable</span></a>
+            <ul aria-expanded="false" class="collapse">
+              <li><a routerLink="/http-observable" [routerLinkActive]="['router-link-active']">Http Observable</a></li>
+            </ul>
+        </li>
+
+        <li>
+          <a routerLink="/starter" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-gauge"></i><span class="hide-menu">Starter Page</span></a>
+        </li>
+        <li>
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Component</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a routerLink="/accordion" [routerLinkActive]="['router-link-active']">Accordion</a></li>
+            <li><a routerLink="/alert" [routerLinkActive]="['router-link-active']">Alert</a></li>
+            <li><a routerLink="/carousel" [routerLinkActive]="['router-link-active']">Carousel</a></li>
+            <li><a routerLink="/datepicker" [routerLinkActive]="['router-link-active']">Datepicker</a></li>
+            <li><a routerLink="/dropdown" [routerLinkActive]="['router-link-active']">Dropdown - Collapse</a></li>
+            <li><a routerLink="/modal" [routerLinkActive]="['router-link-active']">Modal</a></li>
+            <li><a routerLink="/pagination" [routerLinkActive]="['router-link-active']">Pagination</a></li>
+            <li><a routerLink="/poptool" [routerLinkActive]="['router-link-active']">Popover & Tooltip</a></li>
+            <li><a routerLink="/progressbar" [routerLinkActive]="['router-link-active']">Progressbar</a></li>
+            <li><a routerLink="/rating" [routerLinkActive]="['router-link-active']">Ratings</a></li>
+            <li><a routerLink="/tabs" [routerLinkActive]="['router-link-active']">Tabs</a></li>
+            <li><a routerLink="/timepicker" [routerLinkActive]="['router-link-active']">Timepicker</a></li>
+            <li><a routerLink="/typehead" [routerLinkActive]="['router-link-active']">Typehead</a></li>
+          </ul>
+        </li>
+        <li>
+          <a routerLink="/basicform" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>
+        </li>
+        <li>
+          <a routerLink="/wizard" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-file"></i><span class="hide-menu">Form Wizard</span></a>
+        </li>
+        <li>
+          <a routerLink="/basictable" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-table"></i><span class="hide-menu">Tables</span></a>
+        </li>
+        <li>
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-brush"></i><span class="hide-menu">Icons</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a routerLink="/fontawesome" [routerLinkActive]="['router-link-active']">Fontawesome</a></li>
+            <li><a routerLink="/simpleline" [routerLinkActive]="['router-link-active']">Simple Line Icons</a></li>
+            <li><a routerLink="/material" [routerLinkActive]="['router-link-active']">Material Icons</a></li>
+          </ul>
+        </li>
+        <li>
+          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a href="#">item 1.1</a></li>
+            <li><a href="#">item 1.2</a></li>
+            <li> <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a href="#">item 1.3.1</a></li>
+                <li><a href="#">item 1.3.2</a></li>
+                <li><a href="#">item 1.3.3</a></li>
+                <li><a href="#">item 1.3.4</a></li>
+              </ul>
+            </li>
+            <li><a href="#">item 1.4</a></li>
+          </ul>
+        </li> -->
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

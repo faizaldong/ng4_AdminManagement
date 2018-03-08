@@ -1,0 +1,183 @@
+<!-- Back button -->
+<a routerLink="/upgrade-plans" class="back-to-plans"><i class="fa fa-angle-left"></i>&nbsp; Back<span class="hidden-sm-down"> to Plans</span></a>
+
+<!-- Center logo -->
+<div class="payment-logo-container">
+  <img src="assets/images/logo-light-text.png" alt="" class="center hidden-md-up">
+  <img src="assets/images/logo-text.png" alt="" class="center hidden-sm-down">
+</div>
+
+<!-- Billing Period -->
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="mb20">Billing Period</h4>
+          <table class="table payment-table table-sm">
+            <tr *ngFor="let plan of planchose">
+              <td class="payment-icon">
+                <img src="assets/images/icon/icon-{{plan.application_registration.name| lowercase}}.png" alt="LDS" class="full-width">
+              </td>
+              <td class="payment-desc">
+                <p>{{plan.application_registration.full_name}} ({{plan.application_registration.id}})</p>
+                <p class="plan-type text-uppercase">{{plan.planchose.plan_name}} Plan</p>
+                <div class="wrapper-dropdown-3 animate" tabindex="1">
+                  Billed <span class="text-lowercase">{{plan.planchose.plan_frequency.name| lowercase}}</span>
+                  <ul class="dropdown"> 
+                    <li *ngFor="let dplan of plan.plans">
+                      <a href="javascript:;" (click)="choseanually(dplan, plan)">{{dplan.plan_frequency.name}}</a>
+                      <span *ngIf="dplan.plan_frequency.name=='Anually'" class="dropdown-save">Save ${{plan.planchose.saved}}!</span>
+                      <span class="dropdown-price"><sup>$</sup>{{dplan.price}}<sub>{{dplan.plan_frequency.name=='Anually'? '/yr':'/mo'}}</sub></span>
+                    </li>
+                  </ul> 
+                </div>
+
+                <span class="text-red mt10 mb0 d-sm-inline-block d-block"><span class="d-none d-sm-inline-block">&nbsp; </span>Ends <span class="bold">5 Nov 2018</span></span>
+              </td>
+              <td class="payment-price">
+                <span class="price">${{plan.planchose.priceshow}}</span>
+                <!-- Display this when annually is selected -->
+                <span *ngIf="plan.planchose.savedshow" class="text-green text-right fz12 lato">&nbsp; Saved ${{plan.planchose.saved}}!</span>
+              </td>
+            </tr>
+
+            <!-- <tr>
+              <td class="payment-icon">
+                <img src="assets/images/icon/icon-lds.png" alt="LDS" class="full-width">
+              </td>
+              <td class="payment-desc">
+                <p>Logistics Delivery System (LDS)</p>
+                <p class="plan-type text-uppercase">Standard Plan</p>
+                <div class="wrapper-dropdown-3 animate" tabindex="1">
+                  Billed <span class="text-lowercase">annually</span>
+                  <ul class="dropdown">
+                    <li>
+                      <a href="#">Monthly</a>
+                      <span class="dropdown-price"><sup>$</sup>25<sub>/mo</sub></span>
+                    </li>
+                    <li>
+                      <a href="#">Annually</a>
+                      <span class="dropdown-save">Save $24!</span>
+                      <span class="dropdown-price"><sup>$</sup>20<sub>/mo</sub></span>
+                    </li>
+                  </ul>
+                </div>
+
+                <span class="text-red mt10 mb0 d-sm-inline-block d-block"><span class="d-none d-sm-inline-block">&nbsp; </span>Ends <span class="bold">5 Nov 2018</span></span>
+              </td>
+              <td class="payment-price">
+                <span class="text-green text-right fz12 lato">&nbsp; Saved $24!</span>
+              </td>
+            </tr>
+
+            <tr class="app-extension">
+              <td class="payment-icon">
+                <img src="assets/images/icon/icon-extension.png" alt="Extension" class="full-width">
+              </td>
+              <td class="payment-desc">
+                <p>LDS Extension</p>
+                <p class="plan-type">Apptimice</p>
+                <div class="wrapper-dropdown-3 animate" tabindex="1">
+                  Billed <span class="text-lowercase">monthly</span>
+                  <ul class="dropdown">
+                    <li>
+                      <a href="#">Monthly</a>
+                      <span class="dropdown-price"><sup>$</sup>25<sub>/mo</sub></span>
+                    </li>
+                    <li>
+                      <a href="#">Annually</a>
+                      <span class="dropdown-save">Save $24!</span>
+                      <span class="dropdown-price"><sup>$</sup>20<sub>/mo</sub></span>
+                    </li>
+                  </ul>
+                </div>
+
+                <span class="text-red mt10 mb0 d-sm-inline-block d-block"><span class="d-none d-sm-inline-block">&nbsp; </span>Ends <span class="bold">5 Dec 2017</span></span>
+              </td>
+              <td class="payment-price">
+                <span class="price">$23</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="payment-icon">
+                <img src="assets/images/icon/icon-wms.png" alt="WMS" class="full-width">
+              </td>
+              <td class="payment-desc">
+                <p>Warehouse Management System (WMS)</p>
+                <p class="plan-type text-uppercase">Pro Plan</p>
+                <div class="wrapper-dropdown-3 animate" tabindex="1">
+                  Billed <span class="text-lowercase">annually</span>
+                  <ul class="dropdown">
+                    <li>
+                      <a href="#">Monthly</a>
+                      <span class="dropdown-price"><sup>$</sup>25<sub>/mo</sub></span>
+                    </li>
+                    <li>
+                      <a href="#">Annually</a>
+                      <span class="dropdown-save">Save $24!</span>
+                      <span class="dropdown-price"><sup>$</sup>20<sub>/mo</sub></span>
+                    </li>
+                  </ul>
+                </div>
+
+                <span class="text-red mt10 mb0 d-sm-inline-block d-block"><span class="d-none d-sm-inline-block">&nbsp; </span>Ends <span class="bold">5 Nov 2018</span></span>
+              </td>
+              <td class="payment-price">
+                <span class="price">$540</span>
+                <span class="text-green text-right fz12 lato">&nbsp; Saved $24!</span>
+              </td>
+            </tr> -->
+
+          </table>
+
+          <div class="total lato">
+            <div class="row">
+              <div class="col-6">
+                TOTAL</div>
+                <div class="col-6 text-right">
+                  ${{total}}
+                </div>
+              </div>
+              <p *ngIf="totalsavedshow" class="text-green">Congratulations! You saved ${{totalsaved}}</p><!-- Obviously, dont show if no saving -->
+            </div>
+          </div>
+        </div><!-- /.card -->
+
+
+
+        <div class="card" id="PaymentMethod">
+          <div class="card-body">
+            <h4 class="mb30">Payment Method</h4>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-pills payment-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" data-toggle="tab" href="#tabCard" role="tab" (click)="paymentmethod('credit_card')">Debit or Credit Card</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" data-toggle="tab" href="#tabPaypal" role="tab" (click)="paymentmethod('papyal')"><img src="assets/images/cards/paypal.png" alt="Paypal"></a>
+              </li>
+            </ul>
+            <div class="gap hidden-sm-down"></div>
+            <p class="mb0 text-grey">Your transaction will not be charged until after you have confirmed your order.</p>
+          </div>
+        </div><!-- /.card -->
+
+
+
+        <button [disabled]='disabledpay' type="button" name="button" class="place-order btn btn-green disabled waves-effect waves-light" (click)="paynow()"><i [ngClass]="iconpay"></i>&nbsp; {{textpay}}</button>
+
+        <p class="text-center" style="font-size: 12px;">This is a secure 168-bit SSL encrypted payment</p>
+
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+
+  </div><!-- /.container-fluid -->
+
+  <!-- IMPORTANT NOTES : can be declared globally as standby to use anytime without have to import one by one, waiting faizal to decide -->
+    <!-- Dropdown Plugin -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/plugins/custom-payment-dropdown/css/style.css"/> -->
+    <script type="text/javascript" src="assets/plugins/custom-payment-dropdown/js/modernizr.custom.79639.js"></script>
+    <!-- <noscript><link rel="stylesheet" type="text/css" href="assets/plugins/custom-payment-dropdown/css/noJS.css" /></noscript> -->

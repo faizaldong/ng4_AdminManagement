@@ -1,0 +1,164 @@
+<div class="container-fluid r-aside">
+  <ngb-alert *ngIf="deviceshowalert" type="{{devicetotalalert.type}}" (click)="closeAlert()">{{devicetotalalert.message}}</ngb-alert>
+
+  <!-- Full width column card -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex no-block">
+            <h4 class="bold">List of available roles</h4>
+
+            <!-- Add Account -->
+            <div *ngIf="havepermadd" class="ml-auto d-none d-md-block">
+              <a routerLink="/add-role" [routerLinkActive]="['router-link-active']" class="btn waves-effect waves-light btn-green"><i class="fa fa-plus"></i> Add Role</a>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <!-- <div class="row mt20 filters">
+            <div class="col-lg-7">
+              <p class="pt5 mb0">
+                <span class="mr5">Show :</span>
+                <span>
+                  LDS Check
+                  <input id="check_lds" type="checkbox" class="filled-in chk-col-grey" checked>
+                  <label for="check_lds"><img src="assets/images/icon/icon-lds.png" alt=""> LDS</label>
+                  WMS Check
+                  <input id="check_wms" type="checkbox" class="filled-in chk-col-grey" checked>
+                  <label for="check_wms"><img src="assets/images/icon/icon-wms.png" alt=""> WMS</label>
+                  Admin Check
+                  <input id="check_admin" type="checkbox" class="filled-in chk-col-grey" checked>
+                  <label for="check_admin"><img src="assets/images/icon/icon-auth.png" alt=""> Admin</label>
+                </span>
+              </p>
+            </div>
+          </div> -->
+
+
+          <!-- Dengan penuh harapan, saya harap element ini dapat masuk html ni dlm table TD kendo -->
+          <!--
+          /)
+          //
+          __*_             //
+          /-(____)           //
+          ////0 0|\          //
+          ,_/// \ w/|\_        //
+          /  \\   |||  ;       //
+          /____\....::./\      //
+          _/__/#\_ _,,_/__\    //
+          /___/#########\/""-(\</
+          /__/ '######### ""^(/</
+          /__/   ,)))=:= (,   //.
+          ,__\   /Q...... /.  (/
+          .Q....../..\
+          /.Q ..../...\
+          /......./.....\
+          /...../  \.....\
+          /_.._./   \..._\
+          (` )      (` )
+          | /        \ |
+          '(          )'
+          /+|          |+\
+          |,/          \,/
+        -->
+
+        <!-- Table HTML elements -->
+        <div class="kendo-table mt20"><!--WAJIB-->
+          <!-- <table class="table table-striped">Can ignore
+            <tr>
+              <th>Role Name</th>
+              <th>Services</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <tr>
+              <td>Sub Admin</td>
+              <td><img src="assets/images/icon/icon-lds.png" alt="LDS"><img src="assets/images/icon/icon-wms.png" alt="WMS"><img src="assets/images/icon/icon-auth.png" alt="Admin"></td>
+              <td><span class="status-active">&#9679;</span> Active</td>
+              <td class="kendo-action">WAJIB
+                <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Role"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-teal waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Duplicate Role"><i class="fa fa-files-o"></i></button>
+                <button class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Disable Role"><i class="fa fa-power-off"></i></button>
+                <button class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Role"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+
+            Disabled state. Only have "disabled" class. The rest are just the same
+            <tr class="row-disabled">
+              <td>Mini Admin</td>
+              <td><img src="assets/images/icon/icon-lds.png" alt="LDS"><img src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              <td><span class="status-disabled">&#9679;</span> Disabled</td>
+              <td class="kendo-action">WAJIB
+                <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Role"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-teal waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Duplicate Role"><i class="fa fa-files-o"></i></button>
+                <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Activate Role"><i class="fa fa-power-off"></i></button>
+                <button class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Role"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+          </table> -->
+
+          <kendo-grid [kendoGridBinding]="roles" [pageSize]="10" [pageable]="true" [sortable]="true" [filter]="filter" filterable="menu" [groupable]="false" [height]="510" [rowClass]="rowCallback">
+            <kendo-grid-column field="role_name" title="Role Name"></kendo-grid-column>
+            <kendo-grid-column field="role_services" title="Services" filterable="false">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <img *ngFor="let app of dataItem.role_services" src="assets/images/icon/icon-{{app.name| lowercase}}.png" alt="{{app.name}}">
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="is_active" title="Status" filter="boolean">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <span [class.status-active]="dataItem.is_active == true" [class.status-disabled]="dataItem.is_active == false">&#9679;</span> {{dataItem.is_active? 'Active': 'Disabled'}}
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="actions" title="Actions" class="kendo-action">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <button *ngIf="havepermedit" [disabled]="!masteradmin" class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{!masteradmin? 'Cant Edit Role': 'Edit Role'}}" (click)="editRole(dataItem.id)"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-teal waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Duplicate Role"><i class="fa fa-files-o"></i></button>
+                <button *ngIf="dataItem.is_active" [disabled]="!masteradmin||dataItem.id==ownerroleid" class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{(!masteradmin&&dataItem.id==ownerroleid)&&dataItem.is_active? 'Cant Disabled Role': 'Disabled Role'}}" (click)="updateStatus(dataItem)"><i class="fa fa-power-off"></i></button>
+                <button *ngIf="!dataItem.is_active" [disabled]="!masteradmin||dataItem.id==ownerroleid" class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{(!masteradmin&&dataItem.id==ownerroleid)&&!dataItem.is_active? 'Cant Activate Role': 'Activate Role'}}" (click)="updateStatus(dataItem)"><i class="fa fa-power-off"></i></button>
+                <button *ngIf="havepermdelete" [disabled]="!masteradmin||dataItem.id==ownerroleid" class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{!masteradmin||dataItem.id==ownerroleid? 'Cant Remove Role': 'Remove Role'}}" data-toggle="modal" data-target="#deleteModal" (click)="modalRole(dataItem)"><i class="fa fa-trash-o"></i></button>
+              </ng-template>
+            </kendo-grid-column>
+          </kendo-grid>
+        </div>
+
+
+      </div>
+    </div>
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+
+</div><!-- /.container-fluid -->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table">
+        <table class="table selection-table table-striped table-bordered mb0">
+          <tr>
+            <th>Role Name</th>
+            <th>Services</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>{{roleitem.rolename}}</td>
+            <td><img *ngFor="let service of roleitem.roleservice" src="assets/images/icon/icon-{{service.name| lowercase}}.png" alt="{{service.name}}"></td>
+            <td>{{roleitem.rolestatus? 'Active': 'Disabled'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-red" (click)="deleteRole()" [disabled]="deleteDisable">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

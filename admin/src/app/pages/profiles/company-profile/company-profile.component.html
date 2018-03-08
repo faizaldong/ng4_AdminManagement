@@ -1,0 +1,269 @@
+
+<ngb-alert *ngIf="showupdateAlert" type="success" (click)="closeAlertLogin()">Company profile updated</ngb-alert>
+<!-- Message -->
+<div class="form-container">
+  <div class="row">
+    <!-- <div class="col-md-8 offset-md-4"> -->
+    <div class="col-12 text-center">
+      <p class="mb30">By setting up your company profile, the company details will be shown in reports and other necessary places.</p>
+    </div>
+  </div>
+
+  <!-- Image Uploader -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Company Logo</label>
+    </div>
+    <div class="col-md-8">
+      <img id="img64" height="100" width="200" src="{{companyprofile.company_logo}}">
+      <!-- <input type="text" name="" class="form-control" placeholder="No logo was uploaded yet." disabled (change)="getlogo($event)" [(ngModel)]="companyprofile.company_logo"> -->
+      <p class="fz12 mb10">Recommended format : PNG, 300px x 100px</p>
+      <label class="fileContainer">
+          <button class="btn btn-blue">Upload</button>
+          <input type='file' (change)="getcompanyLogo($event)">
+      </label>
+    </div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- Name -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Company Name</label>
+    </div>
+    <div class="col-md-8">
+      <input type="text" class="form-control" placeholder="required" [(ngModel)]="companyprofile.company_name">
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Company Email</label>
+    </div>
+    <div class="col-md-8">
+      <input type="email" class="form-control" placeholder="required" [(ngModel)]="companyprofile.email">
+    </div>
+  </div>
+
+  <!-- Address -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Company Address</label>
+    </div>
+    <div class="col-md-8">
+      <!-- Use Google API -->
+      <input type="text" class="form-control" placeholder="required" [(ngModel)]="companyprofile.address">
+    </div>
+  </div>
+
+  <!-- Subcription -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Subcription Plan</label>
+    </div>
+    <div class="col-md-8">
+      <select class="form-control" (change)="subscribed($event.target.value)">
+        <option *ngFor="let subscribe of subscribeplans" [value]="subscribe.id">{{subscribe.plan_name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tel -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Tel. No.</label>
+    </div>
+    <div class="col-md-8">
+      <input type="tel" class="form-control" [(ngModel)]="companyprofile.contact_no">
+    </div>
+  </div>
+
+  <!-- Fax -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Fax No.</label>
+    </div>
+    <div class="col-md-8">
+      <input type="tel" class="form-control" [(ngModel)]="companyprofile.fax_no">
+    </div>
+  </div>
+
+  <!-- Registration No. -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Registration No.</label>
+    </div>
+    <div class="col-md-8">
+      <input type="text" class="form-control" [(ngModel)]="companyprofile.company_registration_no">
+    </div>
+  </div>
+
+  <!-- I haz branch offices -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">I have branch offices</label>
+    </div>
+    <div class="col-md-8">
+      <input type="radio" id="branch-no" name="branchOffices" class="with-gap radio-col-light-blue" [value]="false" (change)="showBranch($event.target.value)">
+      <label for="branch-no" class="mt5">No</label>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <input type="radio" id="branch-yes" name="branchOffices" class="with-gap radio-col-light-blue" checked [value]="true" (change)="showBranch($event.target.value)">
+      <label for="branch-yes" class="mt5">Yes</label>
+    </div>
+  </div>
+
+</div><!-- /.form-container -->
+
+<div class="container-fluid r-aside" [ngClass]="{'hide': showbranch=='false', '': showbranch=='true'}">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-body">
+                <div class="d-flex no-block">
+                  <h4 class="bold">List of available branch offices</h4>
+
+                  <!-- Add Branch -->
+                  <div class="ml-auto d-none d-md-block">
+                    <button class="btn waves-effect waves-light btn-outline-green" data-toggle="modal" data-target="#addBranch"><i class="fa fa-plus"></i> Add Branch Office</button>
+                  </div>
+                </div>
+
+              <!-- Table HTML elements -->
+              <div class="table-container kendo-table mt20">
+                <table class="table table-striped"><!-- Can ignore -->
+                  <tr>
+                    <th>Branch Name</th>
+                    <th>Branch Email</th>
+                    <th>Branch Address</th>
+                    <th>Branch Tel No</th>
+                    <th>Branch Fax No</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr *ngFor="let branch of companyprofile.application_company_addresses; let i = index ">
+                    <td>{{branch.branch_name}}</td>
+                    <td>{{branch.branch_email}}</td>
+                    <td>{{branch.address}}, {{branch.postal_code}}</td>
+                    <td>{{branch.branch_tel_no}}</td>
+                    <td>{{branch.branch_fax_no}}</td>
+                    <td class="kendo-action" style="width: 100px"><!-- WAJIB -->
+                      <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Branch"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Branch" data-toggle="modal" data-target="#deleteBranchmodal" (click)="deleteBranchmodal(i, branch)"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+
+              </div>
+          </div><!-- /.card -->
+
+          <!-- Submit Button -->
+
+      </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+</div>
+<div class=" container-fluid row">
+  <div class="col-12">
+    <button class="btn btn-green btn-md pull-right" [disabled]="updateDisable" (click)="updateProfile()">Update Company Profile</button>
+  </div>
+</div>
+
+<!-- Modal Add Branch-->
+<div class="modal fade" id="addBranch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Branch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table" style="background: #f4f6f9">
+        <div class="form-container" style="margin-top: 20px">
+				  
+          <div class="row">
+				    <div class="col-md-4 text-md-right">
+				      <label for="">Branch Name</label>
+				    </div>
+				    <div class="col-md-8">
+				      <input type="tel" class="form-control" [(ngModel)]="branch.name">
+				    </div>
+				  </div>
+				  <div class="row">
+				    <div class="col-md-4 text-md-right">
+				      <label for="">Branch Email</label>
+				    </div>
+				    <div class="col-md-8">
+				      <input type="tel" class="form-control" [(ngModel)]="branch.email">
+				    </div>
+				  </div>
+				  <div class="row">
+				    <div class="col-md-4 text-md-right">
+				      <label for="">Branch Address</label>
+				    </div>
+				    <div class="col-md-8">
+				      <input type="tel" class="form-control" [(ngModel)]="branch.addresss">
+				    </div>
+				  </div>
+				  <div class="row">
+				    <div class="col-md-4 text-md-right">
+				      <label for="">Branch Tel No</label>
+				    </div>
+				    <div class="col-md-8">
+				      <input type="tel" class="form-control" [(ngModel)]="branch.tel_no">
+				    </div>
+				  </div>
+				  <div class="row">
+				    <div class="col-md-4 text-md-right">
+				      <label for="">Branch Fax No</label>
+				    </div>
+				    <div class="col-md-8">
+				      <input type="tel" class="form-control" [(ngModel)]="branch.fax_no">
+				    </div>
+				  </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-green" (click)="insertBranch()">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete Branch-->
+<div class="modal fade" id="deleteBranchmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Branch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table">
+        <table class="table table-striped">
+          <tr>
+            <th>Branch Name</th>
+            <th>Branch Address</th>
+            <th>Branch Email</th>
+          </tr>
+          <tr>
+            <td>{{branchdeleteModal.branch_name}}</td>
+            <td>{{branchdeleteModal.address}}</td>
+            <td>{{branchdeleteModal.branch_email}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-red" (click)="deleteBranch()" [disabled]="buttondelete">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

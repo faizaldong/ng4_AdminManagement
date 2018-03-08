@@ -1,0 +1,82 @@
+.plan-type{font-weight: bold;color: #5494DF}
+.container-fluid{width: 600px;margin-left: auto;margin-right:auto;max-width: 100%}
+.card-body{padding: 30px 35px;}
+
+/* Sahre styles with the front pages */
+.order-status-icon{display: inline-block;margin:30px auto;font-size: 120px;}
+
+/* Pricing Table */
+.payment-table{}
+.payment-table tr td{padding-top: 15px;padding-bottom: 15px;}
+.payment-table tr:first-child td{border-top: none}
+.payment-table tr td:first-child{padding-left: 0;}
+.payment-table tr td:last-child{padding-right: 0;}
+.payment-table tr.app-extension td:first-child{border-top: 1px solid transparent}
+.payment-table .payment-icon{width: 85px;padding-right: 10px;}
+.payment-table .payment-desc p{margin-bottom: 0;line-height: 1.4}
+.payment-table .payment-price{font-size: 20px;vertical-align: middle;width: 85px;text-align: right;font-family: 'Lato',sans-serif;line-height: 1}
+.payment-table .payment-price span.price{display:block;margin-bottom:0;}
+
+/* Dropdown Wrapper modifier */
+/* ZA butong */
+.payment-table .wrapper-dropdown-3{margin:0;width: auto;display: inline-block;padding:4px 25px 4px 10px;box-shadow: none;border:none;background: #DCDCDC;color: #474747;font-weight: normal;font-size: 12px;border-radius: 5px;margin-top: 10px;}
+.payment-table .wrapper-dropdown-3:active{background-color: #B5B5B5}
+.payment-table .wrapper-dropdown-3:after{right: 8px;border-width:5px 5px 0 5px;top:54%;border-color:#474747 transparent}
+.payment-table .wrapper-dropdown-3:focus{background-color: #B5B5B5}
+/* ZA dropdong */
+.payment-table .wrapper-dropdown-3 .dropdown{top:100%;width: 220px; box-shadow: 0 2px 5px rgba(0,0,0,.2);padding: 5px 0;border-radius:7px;z-index: 5}
+.payment-table .wrapper-dropdown-3 .dropdown li{position: relative;}
+.payment-table .wrapper-dropdown-3 .dropdown li a{border-bottom: none;padding: 5px 10px;color: #474747;border-radius: 0 !important;font-size: 14px;}
+.payment-table .wrapper-dropdown-3 .dropdown li a:hover{background-color: #eee}
+.payment-table .wrapper-dropdown-3 .dropdown li span{pointer-events: none;}
+.payment-table .wrapper-dropdown-3 .dropdown li span.dropdown-price{position: absolute;right: 5px;top:5px}
+.payment-table .wrapper-dropdown-3 .dropdown li span.dropdown-price sup,
+.payment-table .wrapper-dropdown-3 .dropdown li span.dropdown-price sub{font-size: 65%;color: #909090}
+.payment-table .wrapper-dropdown-3 .dropdown li span.dropdown-save{font-size: 11px;display: inline-block;color: #46CC58;position: absolute;top: 9px;left:74px}
+.payment-table .wrapper-dropdown-3 .dropdown:before,
+.payment-table .wrapper-dropdown-3 .dropdown:after{display: none;}
+
+.total{border-top:1px solid #BBBBBB;padding-top: 20px;}
+.total .row{font-size: 24px;font-weight: bold;}
+.total .row > div:first-child{letter-spacing: 3px;}
+.total p{text-align: right;}
+
+/**************************************************\
+(LG) Small Screens
+\**************************************************/
+@media screen and (min-width: 992px) and (max-width:1199px){
+}
+
+
+/**************************************************\
+(MD+) Tablet and above
+\**************************************************/
+@media screen and (min-width: 768px){
+
+}
+
+/**************************************************\
+(MD) Tablet Only
+\**************************************************/
+@media screen and (min-width:768px) and (max-width: 991px){
+
+}
+
+/**************************************************\
+(MD-) Tablet and below
+\**************************************************/
+@media screen and (max-width: 991px){
+}
+
+
+/**************************************************\
+(SM-) Phone and below
+\**************************************************/
+@media screen and (max-width:767px){
+}
+
+/**************************************************\
+(XS) Phone and below
+\**************************************************/
+@media screen and (max-width:575px){
+}

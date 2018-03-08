@@ -1,0 +1,281 @@
+<div class="container-fluid r-aside">
+
+  <!-- Three column cards -->
+  <div class="row account-summary">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-div">
+            <div class="table-cell">
+              <img src="assets/images/users/default-black.png" alt="LDS icon">
+            </div>
+            <div class="table-cell">
+              <p class="title">Your Account</p>
+              <p class="mb0">{{owneraccount.owner_info.email}} (you)<br/><a (click)="editAccount(owneraccount.owner_info.id)" routerLink="/edit-accounts" style="font-size: 12px;">Edit profile</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.col-md-4 -->
+
+    <!-- LDS Users -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-div">
+            <div class="table-cell">
+              <img src="assets/images/icon/icon-lds.png" alt="LDS icon">
+            </div>
+            <div class="table-cell">
+              <p class="title">LDS Accounts</p>
+              <p class="semibold">{{totalsbyapp.totallds.length}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.col-md-4 -->
+
+    <!-- WMS Users -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-div">
+            <div class="table-cell">
+              <img src="assets/images/icon/icon-wms.png" alt="LDS icon">
+            </div>
+            <div class="table-cell">
+              <p class="title">WMS Accounts</p>
+              <p class="semibold">{{totalsbyapp.totalwms.length}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.col-md-4 -->
+
+
+  </div><!-- /.row -->
+
+  <a class="btn d-block d-md-none waves-effect waves-light btn-green mb30"><i class="fa fa-plus"></i> Add Account</a>
+
+
+  <!-- Full width column card -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex no-block">
+            <h4 class="bold">List of available users</h4>
+
+            <!-- Add Account -->
+            <div *ngIf="havepermadd" class="ml-auto d-none d-md-block">
+              <a routerLink="/add-accounts" class="btn waves-effect waves-light btn-green" (click)="addAccount()"><i class="fa fa-plus"></i> Add Account</a>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="row mt20 filters">
+            <div class="col-lg-7">
+              <p class="pt5 mb0">
+                <span class="mr5">Show :</span>
+                <span *ngFor="let app of apps; let i= index">
+                  <input id="check_{{app.id}}" type="checkbox" class="filled-in chk-col-grey" [checked]="app.checked" (change)="appfilter(i, app)">
+                  <label for="check_{{app.id}}"><img class="shrink" src="assets/images/icon/icon-{{app.name| lowercase}}.png" alt=""> {{app.name=='AUTH'? 'ADMIN':app.name}}</label>
+                </span>
+              </p>
+                <h5> Allowed-admin Slot: <b>{{adminallow}}</b></h5>
+            </div>
+            <div class="col-lg-5 text-left text-lg-right tablet-filter">
+              <div class="gap-sm hidden-md-up"></div>
+              <span class="mr5">Search : </span>
+              <span class="search-container"><input class="input-search" type="text" placeholder="name/email" (input)="globalsearch($event.target.value)"></span>
+              <!-- <h5> Slots admin allow is <b>{{adminallow}}</b></h5> -->
+            </div>
+          </div>
+          <ngb-alert *ngIf="adminshowalert" type="{{adminalertdetails.type}}" (click)="closealert()">{{adminalertdetails.message}}</ngb-alert>
+
+
+          <!-- Dengan penuh harapan, saya harap element ini dapat masuk html ni dlm table TD kendo -->
+          <!--
+          /)
+          //
+          __*_             //
+          /-(____)           //
+          ////0 0|\          //
+          ,_/// \ w/|\_        //
+          /  \\   |||  ;       //
+          /____\....::./\      //
+          _/__/#\_ _,,_/__\    //
+          /___/#########\/""-(\</
+          /__/ '######### ""^(/</
+          /__/   ,)))=:= (,   //.
+          ,__\   /Q...... /.  (/
+          .Q....../..\
+          /.Q ..../...\
+          /......./.....\
+          /...../  \.....\
+          /_.._./   \..._\
+          (` )      (` )
+          | /        \ |
+          '(          )'
+          /+|          |+\
+          |,/          \,/
+        -->
+
+        <!-- Table HTML elements -->
+        <div class="kendo-table mt20"><!-- WAJIB -->
+          <!-- <table class="table table-striped">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Services</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <tr>
+              <td><img src="assets/images/users/default-black.png" class="img-circle" alt="John Dowh's Picture"> <a href="#" class="bold">John Dowh (admin)</a></td>
+              <td><a href="">abam@sado.com</a></td>
+              <td><img class="shrink" src="assets/images/icon/icon-lds.png" alt="LDS"> <img class="shrink" src="assets/images/icon/icon-wms.png" alt="WMS"> <img class="shrink" src="assets/images/icon/icon-admin.png" alt="Admin"></td>
+              <td>AdminisTRAITOR!</td>
+              <td><span class="status-active">&#9679;</span> Active</td>
+              <td class="kendo-action">WAJIB
+                <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Account"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Disable Account"><i class="fa fa-power-off"></i></button>
+                <button class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Account"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+
+            <tr class="row-disabled">
+              <td><img src="assets/images/users/default-black.png" class="img-circle" alt="Edwin Leong's Picture"> <a href="#" class="bold">Edwin Leong</a></td>
+              <td><a href="">eddie@projeckt44.com</a></td>
+              <td><img class="shrink" src="assets/images/icon/icon-lds.png" alt="LDS"> <img class="shrink" src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              <td>Minion TRAITOR!</td>
+              <td><span class="status-disabled">&#9679;</span> Disabled</td>
+              <td class="kendo-action">WAJIB
+                <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Account" [routerLink]="['/edit-accounts']"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Activate Account"><i class="fa fa-power-off"></i></button>
+                <button class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Account"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+          </table> -->
+          <kendo-grid 
+              [data]="admins" 
+              [pageSize]="10" 
+              [pageable]="true" 
+              [sortable]="true" 
+              [filter]="filter" 
+              filterable="menu" 
+              [groupable]="false" 
+              [height]="510" 
+              [rowClass]="rowCallback"
+              (pageChange)="pageChange($event)"
+              >
+              <kendo-grid-column field="first_name" title="Name" [width]="140">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <img src="assets/images/users/default-black.png" class="img-circle" alt="Edwin Leong's Picture">
+                  <label *ngIf="!havepermedit||dataItem.is_banned">{{dataItem.first_name}}</label>
+                  <a *ngIf="havepermedit&&!dataItem.is_banned" (click)="editAccount(dataItem.id)" routerLink="/edit-accounts"><font color="#99CCFF">{{dataItem.first_name}} <label *ngIf="!dataItem.is_banned&&!dataItem.disabled&&dataItem.is_master_admin_application"> (admin) </label></font></a><br>
+                  
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="email" title="Email" [width]="120"></kendo-grid-column>
+              <kendo-grid-column field="id" title="Services" [width]="100" filterable="false">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <img *ngFor="let app of dataItem.application_registrations " class="shrink" src="assets/images/icon/icon-{{app.name| lowercase}}.png" alt="{{app.name}}">
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="roles" title="Role" [width]="130">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  {{dataItem.roles[0].role_name}}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="disabled" title="Status" [width]="130" filter="boolean">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <span [class.status-disabled]="!dataItem.is_banned&&dataItem.disabled" [class.status-active]="!dataItem.is_banned&&!dataItem.disabled">&#9679;</span>{{dataItem.is_banned? 'Banned': ''}} {{!dataItem.is_banned&&dataItem.disabled? 'Disabled': ''}} {{!dataItem.is_banned&&!dataItem.disabled? 'Active': ''}}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column title="Actions" [width]="130" class="kendo-action">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <button *ngIf="havepermedit" [disabled]="dataItem.is_banned" class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{dataItem.is_banned? 'Cant Edit Account': 'Edit Account'}}" (click)="editAccount(dataItem.id)" ><i class="fa fa-pencil"></i></button>
+                  <button *ngIf="dataItem.id!=owneraccount.owner_info.id&&!dataItem.is_banned&&dataItem.disabled==false" class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{dataItem.id==owneraccount.owner_info.id?'Cant disabled your account':'Disabled Account'}}" (click)="updateStatus(dataItem)" [disabled]="dataItem.id==owneraccount.owner_info.id?true:false"><i class="fa fa-power-off"></i></button>
+                  <button *ngIf="dataItem.id!=owneraccount.owner_info.id&&!dataItem.is_banned&&dataItem.disabled==true" class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{dataItem.id==owneraccount.owner_info.id?'Cant activate your account':'Activate Account'}}" (click)="updateStatus(dataItem)" [disabled]="dataItem.id==owneraccount.owner_info.id?true:false"><i class="fa fa-power-off"></i></button>
+                  <button *ngIf="dataItem.id!=owneraccount.owner_info.id&&dataItem.is_banned" class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{dataItem.id==owneraccount.owner_info.id?'Cant unbanned your account':'Unbanned Account'}}" (click)="updateStatus(dataItem)" [disabled]="dataItem.id==owneraccount.owner_info.id?true:false"><i class="fa fa-unlock"></i></button>
+                  <button *ngIf="havepermdelete&&dataItem.id!=owneraccount.owner_info.id" class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="{{dataItem.id==owneraccount.owner_info.id?'':'Remove Account'}}" data-toggle="modal" data-target="#deleteModal" (click)="deleteModal(dataItem)" [disabled]="dataItem.id==owneraccount.owner_info.id?true:false"><i class="fa fa-trash-o"></i></button>
+                </ng-template>
+              </kendo-grid-column>
+          </kendo-grid>
+        </div>
+
+
+      </div>
+    </div>
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+<!-- Modal Delete -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table">
+        <table class="table selection-table table-striped table-bordered table-condensed mb0">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+          <tr>
+            <td>{{nameDelete}}</td>
+            <td>{{emailDelete}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" (click)="deleteAccount()">Remove {{nameDelete}}</a>
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn waves-effect waves-light btn-red" (click)="deleteAccount()" [disabled]="buttondelete">Delete</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Unbanned-->
+<div class="modal fade" id="unbannedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Unbanned Admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table">
+        <div class="has-warning"><span class="form-control-feedback">{{unbannedtext}}</span></div>
+        <table class="table selection-table table-striped table-bordered table-condensed mb0">
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Master Admin</th>
+          </tr>
+          <tr *ngFor="let admin of foundadminunbanned">
+            <td><input *ngIf="!admin.is_master_admin_application" [disabled]="cboxrestrict==adminidtodelete.length&&admin.checked==false" type="checkbox" id="{{admin.id}}" class="chk-col-red" name="cbox" (click)="cboxadminid(admin)" [checked]="admin.checked" ><label for="{{admin.id}}"></label>
+              <!-- [ID:{{admin.id}}] [iddeletelength:{{adminidtodelete.length}}] [checkedstat: {{admin.checked}}] -->
+            </td>
+            <td>{{admin.first_name}}</td>
+            <td>{{admin.email}}</td>
+            <td>{{admin.is_master_admin_application? 'Yes': 'No'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" (click)="closemodalunbanned()">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-red" (click)="unbannedAccount()" [disabled]="buttondelete">Unbanned Account</button>
+      </div>
+    </div>
+  </div>
+</div>

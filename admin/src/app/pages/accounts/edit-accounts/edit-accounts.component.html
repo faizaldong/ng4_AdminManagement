@@ -1,0 +1,85 @@
+<div class="form-container">
+  <!-- Image Uploader -->
+  <div class="row">
+    <div class="col-md-8 offset-md-4">
+      <img src="assets/images/users/default-grey.png" alt="">
+      <div class="gap"></div>
+    </div>
+  </div>
+
+  <!-- Name -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Name</label>
+    </div>
+    <div class="col-md-8" [ngClass]="{'has-warning': nameInvalid}">
+      <input type="text" class="form-control form-control-warning" [value]="admin.first_name" placeholder="required" [(ngModel)]="admin.first_name">
+      <div class="form-control-feedback" *ngIf="nameInvalid">Sorry, name is required</div>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Email</label>
+    </div>
+    <div class="col-md-8" [ngClass]="{'has-warning': emailInvalid}">
+      <input type="email" class="form-control form-control-warning" placeholder="required" [(ngModel)]="admin.email">
+      <div class="form-control-feedback" *ngIf="emailInvalid">Sorry, email is required</div>
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Password</label>
+    </div>
+    <div class="col-md-8">
+      <input type="password" class="form-control form-control-warning" [(ngModel)]="admin.password" placeholder="Leave blank if you dont want to change">
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="row" [class.disabled]="!isadmin">
+    <div class="col-md-4 text-md-right">
+      <label for="">Services</label>
+    </div>
+    <div class="mt10 col-md-8">
+      <div *ngFor="let app of apps">
+        <input id="check_{{app.id}}" value="{{app.id}}" type="checkbox" class="filled-in chk-col-grey" [checked]="app.selected" (change)="appChose($event, app)" [disabled]="app.id==3">
+        <label for="check_{{app.id}}"><img src="assets/images/icon/icon-{{app.name| lowercase}}.png" alt="">{{app.full_name}}</label>
+      </div>
+      <div [ngClass]="{'has-warning': serviceInvalid}">
+        <label class="form-control-feedback" *ngIf="serviceInvalid">Sorry, please choose atleast one service</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Role -->
+  <div class="row" [class.disabled]="!isadmin">
+    <div class="col-md-4 text-md-right">
+      <label for="">Role</label>
+    </div>
+    <div class="col-md-8">
+      <div [ngClass]="{'has-warning': roleInvalid}" >
+        <select class="form-control" (click)="onChange($event.target.value)" [disabled]="roleOptions">
+          <!-- <option value="">Choose applications above first</option> -->
+          <option *ngFor="let role of allroles" [value]="role.id" [selected]="role.id == roleSelected">{{role.role_name}}</option>
+        </select>
+        <label class="form-control-feedback" *ngIf="roleInvalid">Sorry, please choose atleast one service</label>
+      </div>
+      <p *ngIf="createrole" class="text-red text-danger mt10">Role not available for selected services(s). <a routerLink="/add-role" [routerLinkActive]="['router-link-active']" class="underline d-sm-inline-block d-block">Create new role</a></p>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="row">
+    <div class="col-md-4 text-md-right"></div>
+    <div class="col-md-8">
+      <button class="btn btn-green btn-md" (click)="editAccount()" [disabled]="buttondisabled">Edit Account</button>
+      <div class="gap-sm"></div>
+      <p class="footnote">An email will be sent to this user about their account.</p>
+    </div>
+  </div>
+
+</div><!-- /.form-container -->

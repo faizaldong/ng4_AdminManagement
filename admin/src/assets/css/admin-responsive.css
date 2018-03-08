@@ -1,0 +1,149 @@
+/**************************************************\
+(XL) Large Monitor Only
+\**************************************************/
+@media screen and (min-width: 1200px){}
+
+
+
+
+
+
+
+/**************************************************\
+(LG+) Small Monitor and above
+\**************************************************/
+@media screen and (min-width: 992px){
+  .form-control[readonly]:hover{cursor: pointer;}
+
+  .btn.btn-green:hover{background-color: #2A9516;border-color: #2A9516;}
+  .btn.btn-darkred:hover{background-color: #8C1717;border-color: #8C1717;}
+  .btn.btn-blue:hover{background-color: #448ECD;border-color: #448ECD;}
+  .btn.btn-grey:hover{background-color: #777777;border-color: #777777;}
+  .btn.btn-lightgrey:hover{background-color: #C4C4C4;border-color: #C4C4C4;}
+  .btn.btn-red:hover{background-color: #B74444;border-color: #B74444;opacity: 1}
+  .btn.btn-teal:hover{background-color: #1E8A94;border-color: #1E8A94;}
+  .btn.btn-oceanblue:hover{background-color: #3277C9;border-color: #3277C9;}
+  .btn.btn-outline-darkgrey:hover{background: #545454;border:#545454 1px solid;color: #fff}
+  .btn.btn-outline-green:hover{background: #4BB538;border:#4BB538 1px solid;color: #fff}
+  .btn.btn-outline-oceanblue:hover{background: #5494DF;border:#5494DF 1px solid;color: #fff}
+
+  .topbar .navbar-light .navbar-nav .nav-item > a.nav-link:hover{color:#a6b7bf !important}
+  .topbar .dropdown-menu.user-dropdown a:hover{color: #fff !important;}
+  .topbar .dropdown-menu.user-dropdown .profile-pic-container a:hover i{background-color: #6AF255 !important}
+  .topbar .navbar-light .navbar-nav .nav-item.nav-upgrade a:hover{color:#3C7D00 !important}
+  .topbar .navbar-light .navbar-nav .nav-item.nav-upgrade a:hover i{border:1px solid #3C7D00 !important}
+  .mini-sidebar .sidebar-nav > ul > li.active:hover {width: 100%;}
+  .kendo-table td.kendo-action .btn.btn-green:hover{background-color: #3B9C3E;border-color: #3B9C3E;}
+
+  .mini-sidebar .sidebar-nav > ul > li:hover > a:focus,
+  .mini-sidebar .sidebar-nav > ul > li:hover > a{background-color: #5494DF !important; color:#fff;}
+  .mini-sidebar .sidebar-nav > ul > li:hover > a > i{color:#fff}
+  .mini-sidebar .sidebar-nav > ul > li:hover > a.has-lock{background: repeating-linear-gradient(45deg,#5494DF,#5494DF 10px,#4685CE 10px,#4685CE 20px) !important;}
+  .mini-sidebar .sidebar-nav > ul > li:hover > a.has-lock::after{top:20px;color:#dce846}
+  .mini-sidebar .sidebar-nav > ul > li:hover > a > .hide-menu{display: inline-block;margin-left: 5px;}
+  .mini-sidebar .sidebar-nav > ul > li:hover > ul{margin-top: 2px;}
+}
+
+
+/**************************************************\
+(LG) Small Monitor Only
+\**************************************************/
+@media screen and (min-width:992px) and (max-width: 1199px){}
+
+
+/**************************************************\
+(LG-) Small Monitor and below
+\**************************************************/
+@media screen and (max-width: 1199px){}
+
+
+
+
+
+
+
+
+/**************************************************\
+(MD+) Tablet and above
+\**************************************************/
+@media screen and (min-width: 768px){}
+
+
+/**************************************************\
+(MD) Tablet Only
+\**************************************************/
+@media screen and (min-width:768px) and (max-width: 991px){}
+
+
+/**************************************************\
+(MD-) Tablet and below
+\**************************************************/
+@media screen and (max-width: 991px){}
+
+
+
+
+
+
+/**************************************************\
+(SM) Phone Landscape Only
+\**************************************************/
+@media only screen and (min-width: 576px) and (max-width: 767px) {}
+
+/**************************************************\
+(SM-) Phone and below
+\**************************************************/
+@media screen and (max-width:767px){
+  body{font-weight:normal !important}
+  input,button, .btn{width: 100%;font-size: 16px;padding-top: 10px;padding-bottom: 10px;}
+
+  /* Navbar Styling */
+  .topbar .navbar-collapse{background-color: #3D506C;}
+  .navbar-nav.mr-auto{width: 100%;}
+  .page-title{width: 100%;text-align:center}
+  .topbar .top-navbar .navbar-nav > .nav-item > span{display: inline-block;font-size: 18px;margin-top: 4px;color:#fff}
+  .topbar .navbar-light .navbar-nav .nav-item > a.nav-link{color:#fff}
+
+  /* User Dropdown Menu */
+  .topbar .dropdown-menu.user-dropdown{border-radius: 0;background-color: #222B35;}
+  .topbar .dropdown-menu.user-dropdown p,
+  .topbar .dropdown-menu.user-dropdown a{font-weight:normal !important; font-size: 16px;}
+
+  /* Sidebar lock position fix */
+  .show-sidebar.mini-sidebar .sidebar-nav .has-lock::after{top:9px !important}
+  .show-sidebar.mini-sidebar .scroll-sidebar{height: calc(100% - 40px)}
+
+  /* Sidebar Nav styling */
+  .sidebar-nav ul li a{color: #6E86AE;padding:10px 35px 10px 20px;font-size: 16px;}
+  .sidebar-nav ul li a.nav-services{padding:5px 35px 5px 20px}
+  .sidebar-nav ul li a span{padding-left: 5px;}
+  .sidebar-nav > ul > li > a > i{margin-top: -4px;}
+  .mini-sidebar .sidebar-nav > ul > li.active {width: 100%;}
+
+  .mini-sidebar .sidebar-nav > ul > li:hover > a > .hide-menu{margin-left: 0px;}
+
+  .filters span:not(.search-container){display: block;}
+  .filters span.mr5{margin-bottom: 10px;}
+
+  .search-container,.search-container.date-override{width: 100%}
+
+  .daterangepicker{width: calc(100% - 70px) !important}
+  .calendar{width: 100% !important}
+
+  .modal-dialog{margin:0}
+  .modal-dialog,.modal-content{min-height: 100%;max-width: 100%}
+  .modal .close{width: 40px}
+
+  .toggle-group .btn.toggle-off{padding-right: 65px}
+  .toggle-group .btn.toggle-on{padding-right: 110px;}
+
+  .modal-footer{display:block}
+  .modal-footer a{position:static;top:auto;left:auto;display:block;text-align: center;padding:10px 0;margin-left: 8px;margin-bottom:15px;}
+  .modal-footer button{margin-bottom: 15px}
+}
+
+
+/**************************************************\
+(XS) Phone Portrait Only
+\**************************************************/
+@media only screen and (max-width: 575px){}

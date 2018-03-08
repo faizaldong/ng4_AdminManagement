@@ -1,0 +1,108 @@
+<div class="container-fluid r-aside">
+  
+  <ngb-alert *ngIf="showRoleAlert" type="{{roleAlert.type}}" (click)="closeAlertRole()">{{roleAlert.message}}</ngb-alert>
+  <!-- Role Title -->
+  <div class="row mb30 mt10">
+    <div class="col-12">
+      <p>Role Title</p>
+    </div>
+    <div class="col-12">
+      <input type="text" name="" class="form-control form-role" placeholder="required" [(ngModel)]="roles.name">
+      <span class="d-inline-block role">or</span>
+      <button type="button" name="button" class="btn btn-outline-darkgrey" data-toggle="modal" data-target="#duplicateRole">Duplicate from...</button>
+    </div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- Roles -->
+  <h3 class="semibold mb20">Role Permissions</h3>
+
+  <!-- Tab Menu -->
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav" id="tab" role="tablist">
+        <!-- dev -->
+        <li class="nav-item" *ngFor="let service of rolepermission">
+          <input id="check_{{service.application_registration.name| lowercase}}" type="checkbox" class="filled-in chk-col-grey grandparent-check" [checked]="service.selected" [value]="service.selected" (change)="selectdeselectAllBox(service.application_registration, $event.target.getAttribute('value'))">
+          <label for="check_{{service.application_registration.name| lowercase}}"></label>
+          <a data-target="#{{service.application_registration.name| lowercase}}" data-toggle="tab" role="tab" aria-controls="" aria-selected="true" class="nav-link active" [class.active]="service.application_registration.name==listpermissionArray.application_registration.name" (click)="listdownAllPermissions(service.application_registration.name)">
+            <img src="assets/images/icon/icon-{{service.application_registration.name| lowercase}}.png" alt=""> {{service.application_registration.name=='AUTH'?'ADMIN':service.application_registration.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="col-md-12 tab-content-container">
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content" id="tabContent">
+
+            <!-- LDS Content -->
+            <div class="tab-pane fade show active" id="lds" role="tabpanel" aria-labelledby="lds-tab">
+              <!-- dev -->
+              <div class="subcontent mt30" *ngFor="let permissiongroup of listpermissionArray.permissions">
+                <div class="subcontent-header">
+                  <input id="{{permissiongroup.name|lowercase}}_transport" type="checkbox" class="filled-in chk-col-grey parent-check" [checked]="permissiongroup.selected" [value]="permissiongroup.selected" (change)="selectdeselectGroupBox(permissiongroup, $event.target.getAttribute('value'))">
+                  <label for="{{permissiongroup.name|lowercase}}_transport" class="semibold">{{permissiongroup.name}}</label>
+                </div>
+                <div class="subcontent-content">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let permissionlist of permissiongroup.permissions">
+                      <!-- {{permissionlist.id}} --><input id="{{permissionlist.name|lowercase}}_transport_transport" type="checkbox" class="filled-in chk-col-grey child-check" [checked]="permissionlist.selected" [value]="permissionlist.selected" (change)="selectdeselectBox(permissionlist, $event.target.getAttribute('value'))">
+                      <label for="{{permissionlist.name|lowercase}}_transport_transport">{{permissionlist.name}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-green btn-md  waves-effect waves-light" (click)="editRole()" [disabled]="createDisable">Edit Role</button>
+    </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="duplicateRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Duplicate role from...</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body duplicate-role-table">
+            <table class="table selection-table table-striped table-bordered table-condensed mb0">
+            <tr>
+              <th>Role Name</th>
+              <th>Services</th>
+            </tr>
+            <tr *ngFor="let dup of duplicatepermission">
+              <td>
+                <input type="radio" name="duplicate" id="{{dup.role_name}}" class="with-gap radio-col-light-blue" (change)="duplicateradio(dup)">
+                <label for="{{dup.role_name}}">{{dup.role_name}}</label>
+              </td>
+              <td><img *ngFor="let service of dup.role_services" src="assets/images/icon/icon-{{service.name| lowercase}}.png" alt="{{service.name}}"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal" (click)="isnoduplicate()">Close</button>
+          <button type="button" class="btn waves-effect waves-light btn-green" data-dismiss="modal" (click)="isduplicate()">Duplicate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div><!-- /.container-fluid -->

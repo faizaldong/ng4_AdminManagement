@@ -1,0 +1,33 @@
+<!-- Center logo -->
+<div class="payment-logo-container">
+  <img src="assets/images/logo-light-text.png" alt="" class="center hidden-md-up">
+  <img src="assets/images/logo-text.png" alt="" class="center hidden-sm-down">
+</div>
+
+<!-- Billing Period -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Order Status -->
+    <!-- ============================================================== -->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="fa fa-times-circle order-status-icon text-red"></i>
+          <h4>Payment Failed</h4>
+          <p class="mb0">Insufficient balance in your credit card.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5 offset-sm-1">
+      <!-- <button class="btn btn-outline-darkgrey capital btn-md-spacing full-width mb20 waves-effect waves-light"  onclick="window.location.href='index.php'">Back to Dashboard</button> -->
+      <button class="btn btn-outline-darkgrey capital btn-md-spacing full-width mb20 waves-effect waves-light" routerLink="/dashboard">Back to Dashboard</button>
+    </div>
+    <div class="col-sm-5">
+      <!-- <button class="btn btn-green capital btn-md-spacing full-width mb20 waves-effect waves-light"  onclick="window.location.href='payment.php'">Back to Order</button> -->
+      <button class="btn btn-green capital btn-md-spacing full-width mb20 waves-effect waves-light" routerLink="/upgrade-plans">Back to Order</button>
+    </div>
+
+  </div><!-- /.row -->
+</div><!-- /.container-fluid -->

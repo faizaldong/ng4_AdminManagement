@@ -1,0 +1,107 @@
+<div class="container-fluid r-aside">
+
+
+  <!-- Full width column card -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Filters -->
+          <div class="row filters mt10">
+            <div class="col-md-6 tablet-filter">
+              <div class="gap-sm hidden-md-up"></div>
+              <span class="mr5">Date : </span>
+              <span class="search-container date-override"><input class="input-search form-control input-daterange-datepicker" type="text" readonly="readonly"></span>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="row mt30 filters">
+            <div class="col-lg-7">
+              <p class="pt5 mb0">
+                <span class="mr5">Show :</span>
+                <span>
+                  <!-- LDS Check -->
+                  <input id="check_lds" type="checkbox" class="filled-in chk-col-grey" checked>
+                  <label for="check_lds"><img src="assets/images/icon/icon-lds.png" alt=""> LDS</label>
+                  <!-- WMS Check -->
+                  <input id="check_wms" type="checkbox" class="filled-in chk-col-grey" checked>
+                  <label for="check_wms"><img src="assets/images/icon/icon-wms.png" alt=""> WMS</label>
+                  <!-- Admin Check -->
+                  <input id="check_admin" type="checkbox" class="filled-in chk-col-grey" checked>
+                  <label for="check_admin"><img src="assets/images/icon/icon-admin.png" alt=""> Admin</label>
+                </span>
+              </p>
+            </div>
+            <div class="col-lg-5 text-left text-lg-right tablet-filter">
+              <div class="gap-sm hidden-md-up"></div>
+              <span class="mr5">Search : </span>
+              <span class="search-container"><input class="input-search" type="text" placeholder="name or activity"></span>
+            </div>
+          </div>
+
+
+
+
+          <!-- Dengan penuh harapan, saya harap element ini dapat masuk html ni dlm table TD kendo -->
+          <!--
+          /)
+          //
+          __*_             //
+          /-(____)           //
+          ////0 0|\          //
+          ,_/// \ w/|\_        //
+          /  \\   |||  ;       //
+          /____\....::./\      //
+          _/__/#\_ _,,_/__\    //
+          /___/#########\/""-(\</
+          /__/ '######### ""^(/</
+          /__/   ,)))=:= (,   //.
+          ,__\   /Q...... /.  (/
+          .Q....../..\
+          /.Q ..../...\
+          /......./.....\
+          /...../  \.....\
+          /_.._./   \..._\
+          (` )      (` )
+          | /        \ |
+          '(          )'
+          /+|          |+\
+          |,/          \,/
+        -->
+
+        <!-- Table HTML elements -->
+        <div class="kendo-table mt20"><!-- WAJIB -->
+          <table class="table table-striped"><!-- Can ignore -->
+            <tr>
+              <th>Name</th>
+              <th>Activity</th>
+              <th>Services</th>
+              <th>Time</th>
+            </tr>
+            <tr>
+              <td><a href="#" class="bold">John Dowh (admin)</a></td><!-- on click, edit account -->
+              <td>Created User <a href="" class="bold">Laura Sandoval</a> for LDS.</td>
+              <td><img src="assets/images/icon/icon-admin.png" alt="Admin"> Admin</td>
+              <td>A few seconds ago</td>
+            </tr>
+
+            <!-- Disabled state. Only have "disabled" class. The rest are just the same -->
+            <tr>
+              <td><a href="#" class="bold">Edwin Leong</a></td><!-- on click, edit account -->
+              <td>Created a job DO-201710-0423.</td>
+              <td><img src="assets/images/icon/icon-lds.png" alt="LDS"> LDS</td>
+              <td>Fri, 3 Nov 2017, 12:00 PM</td>
+            </tr>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+
+</div><!-- /.container-fluid -->

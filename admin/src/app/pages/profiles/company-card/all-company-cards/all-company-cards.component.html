@@ -1,0 +1,63 @@
+<div class="container-fluid r-aside">
+
+  <ngb-alert *ngIf="vaultshowerror" type="warning" (click)="closealertvault()">{{vaulttext}}</ngb-alert>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex no-block">
+            <div class="col-lg-5">
+              <h4 class="bold">List of vault cards</h4>
+            </div>
+            <div class="col-lg-7" align="right">
+              <a *ngIf="havepermadd" href="javascript:void(0)" class="btn waves-effect waves-light btn-green" (click)="addvault()"><i class="fa fa-plus"></i> Vault Card</a>
+              <button *ngIf="havepermdelete" href="javascript:void(0)" [disabled]="deletedisabled" class="btn waves-effect waves-light btn-red" (click)="deletevaultmultiple()"><i class="fa fa-trash"></i> {{deletetext}}</button>              
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="row mt20 filters">
+            <div class="col-lg-5 tablet-filter">
+             <!--  <div class="gap-sm hidden-md-up"></div>
+              <span class="mr5">Search : </span>
+              <span class="search-container"><input class="input-search" type="text" placeholder="device or user" (input)="searchData($event.target.value)"></span> -->
+            </div>
+          </div>
+
+        <div class="kendo-table mt20">
+          <kendo-grid 
+            [kendoGridBinding]="vaults" 
+            [pageSize]="20"
+            [pageable]="true" 
+            [sortable]="true" 
+            [filter]="filter"
+            [skip]=0
+            [groupable]="false" 
+            [height]="510"
+            (pageChange)="pageChange($event)"
+            [kendoGridSelectBy]="'id'"
+            [selectable]="{enabled:true, checkboxOnly:true}"
+            (selectedKeysChange)="checkboxes($event)"
+            >
+            <kendo-grid-checkbox-column *ngIf="havepermdelete" showSelectAll="true" width="40"></kendo-grid-checkbox-column>
+            <!-- <kendo-grid-checkbox-column width="40"></kendo-grid-checkbox-column> -->
+            <kendo-grid-column field="cc_id" title="Credit Card Id">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <label *ngIf="!havepermshow">{{dataItem.cc_id}}</label>
+                <a *ngIf="havepermshow" (click)="editvault(dataItem.id)" title="Edit Vault" ><font color="#99CCFF">{{dataItem.cc_id}}</font></a>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="is_active" title="Status">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{dataItem.is_active? 'Active': 'Disabled'}}
+              </ng-template>
+            </kendo-grid-column>
+          </kendo-grid>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

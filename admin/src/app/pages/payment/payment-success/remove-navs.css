@@ -1,0 +1,15 @@
+/* Hide distractions. AAGHH!!! */
+aside.left-sidebar,.navbar-header,.navbar-expand-md .navbar-collapse *{display: none !important;}
+.navbar-expand-md .navbar-collapse {height: 70px !important;}
+.back-to-plans{position: fixed;top:24px;left: 20px;z-index:52;color: #000 !important;}
+.back-to-plans:hover{text-decoration: underline;color: #000 !important;}
+.payment-logo-container{pointer-events: none;position: fixed;top:25px;left:0;width: 100%;z-index: 51 !important;}
+.page-wrapper{margin-left: 0 !important;}
+.container{padding-right: 0;padding-left: 0 !important;}
+
+/**************************************************\
+(SM-) Phone and below
+\**************************************************/
+@media screen and (max-width:767px){
+  .back-to-plans{color: #fff !important}
+}

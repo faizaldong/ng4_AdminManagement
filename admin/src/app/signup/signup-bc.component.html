@@ -1,0 +1,458 @@
+ <div class="" style="background-image:url(assets/images/background/login-register.jpg);">
+    <div class="login-box card">
+        <div class="card-body">
+            <form class="form-horizontal form-material">
+                 <h3 class="box-title m-b-20">Company</h3>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="company_registration_no" type="text" placeholder="Company Registration" required="" [(ngModel)]="company.company_registration_no">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="company_name" type="email" placeholder="Company Name" required="" [(ngModel)]="company.company_name">
+                    </div>
+                </div>
+                <!-- <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="company_logo" type="text" placeholder="Company Logo" required="" [(ngModel)]="company.company_logo">
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="email" type="text" placeholder="Email" required="" [(ngModel)]="company.email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="contact_no" type="text" placeholder="Contact" required="" [(ngModel)]="company.contact_no">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="unit_no" type="text" placeholder="Unit No" required="" [(ngModel)]="company.unit_no">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="building_no" type="text" placeholder="Building No" required="" [(ngModel)]="company.building_no">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="address" type="text" placeholder="Address" required="" [(ngModel)]="company.address">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="postal_code" type="text" placeholder="Postal Code" required="" [(ngModel)]="company.postal_code">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="requested_admin" type="number" min="0" placeholder="Total Admin" required="" [(ngModel)]="company.requested_admin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" name="requested_device" type="number" min="0" placeholder="Total Device" required="" [(ngModel)]="company.requested_device">
+                    </div>
+                </div>
+
+                <hr>
+                <h3 class="box-title m-b-20">Admin</h3>
+                <div class="ml-auto d-none d-md-block">
+                  <button class="btn waves-effect waves-light btn-outline-green" data-toggle="modal" data-target="#addAdmin"><i class="fa fa-plus"></i> Add Admin Office</button>
+                </div>
+                <div class="kendo-table mt20">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Admin Name</th>
+                      <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let admin of admins; let i=index">
+                      <td>{{admin.first_name}}</td>
+                      <td class="kendo-action">
+                        <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Admin" (click)="modaleditAdmin(i, admin)" data-toggle="modal" data-target="#editAdmin"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Admin" data-toggle="modal" data-target="#deleteBranchmodal" (click)="deleteAdmin(i)"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <hr>
+                <h3 class="box-title m-b-20">Branch</h3>
+                <div class="ml-auto d-none d-md-block">
+                  <button class="btn waves-effect waves-light btn-outline-green" data-toggle="modal" data-target="#addBranch"><i class="fa fa-plus"></i> Add Branch Office</button>
+                </div>
+                <div class="kendo-table mt20">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Branch Name</th>
+                      <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let branch of application_company_addresses; let i=index">
+                      <td>{{branch.branch_name}}</td>
+                      <td class="kendo-action">
+                        <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Branch" (click)="modaleditBranch(i, branch)" data-toggle="modal" data-target="#editBranch"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Branch" data-toggle="modal" data-target="#deleteBranchmodal" (click)="deleteBranch(i)"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-success p-t-0">
+                            <input id="checkbox-signup" name="agreeterm" type="checkbox" required="" class="filled-in chk-col-light-blue" [(ngModel)]="agreeterm">
+                            <label for="checkbox-signup"> I agree to all <a href="javascript:void(0)">Terms</a></label>
+                            <div [ngClass]="{'has-warning': showtermcheckbox}">
+                              <label class="form-control-feedback" *ngIf="showtermcheckbox" >Please accept term and agreement</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center p-b-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" (click)="signup()" [disabled]="signupdisabled">Sign Up</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        Already have an account? <a class="text-info m-l-5" (click)="haveaccount()"><b>Sign In</b></a>
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add Admin-->
+<div class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table" style="background: #f4f6f9">
+        <div class="form-container" style="margin-top: 20px">
+          
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="admin.add_first_name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Email</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="admin.add_email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Address</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="admin.add_address">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Tel No</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="admin.add_contact_no">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Password</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="admin.add_password">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-green" (click)="insertAdmin()">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Admin-->
+<div class="modal fade" id="editAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table" style="background: #f4f6f9">
+        <div class="form-container" style="margin-top: 20px">
+          
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="adminedit.edit_first_name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Email</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="adminedit.edit_email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Address</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="adminedit.edit_address">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Tel No</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="adminedit.edit_contact_no">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Password</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="adminedit.edit_password">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-green" (click)="editAdmin()">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add Branch-->
+<div class="modal fade" id="addBranch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Branch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table" style="background: #f4f6f9">
+        <div class="form-container" style="margin-top: 20px">
+          
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" [(ngModel)]="branch.add_branch_name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Email</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" [(ngModel)]="branch.add_branch_email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Address</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" [(ngModel)]="branch.add_address">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Tel No</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" [(ngModel)]="branch.add_branch_tel_no">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Fax No</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" [(ngModel)]="branch.add_branch_fax_no">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-green" (click)="insertBranch()">Insert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Branch-->
+<div class="modal fade" id="editBranch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Branch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table" style="background: #f4f6f9">
+        <div class="form-container" style="margin-top: 20px">
+          
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Name</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="branchedit.edit_branch_name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Email</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="branchedit.edit_branch_email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Address</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="branchedit.edit_address">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Tel No</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="branchedit.edit_branch_tel_no">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 text-md-right">
+              <label for="">Branch Fax No</label>
+            </div>
+            <div class="col-md-8">
+              <input type="tel" class="form-control" [(ngModel)]="branchedit.edit_branch_fax_no">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-green" (click)="editBranch()">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
+    <div class="login-box card">
+        <div class="card-body">
+            <form class="form-horizontal form-material" id="loginform">
+                <h3 class="box-title m-b-20">Company</h3>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" placeholder="Name" required="">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="email" placeholder="Email" required="">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" placeholder="Password" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" placeholder="Confirm Password" required="">
+                    </div>
+                </div>
+
+                <hr>
+                <h3 class="box-title m-b-20">Admin</h3>
+                <div class="kendo-table mt20">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Branch Name</th>
+                      <th>Branch Address</th>
+                      <th>Actions</th>
+                    </tr>
+                    <tr>
+                      <td>logisfleet</td>
+                      <td>mid valley</td>
+                      <td class="kendo-action">
+                        <button class="btn btn-blue waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit Branch"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Branch" data-toggle="modal" data-target="#deleteBranchmodal" (click)="deleteBranchmodal(i, branch)"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <hr>
+                <h3 class="box-title m-b-20">Branch</h3><br>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-success p-t-0">
+                            <input id="checkbox-signup" type="checkbox" required="" class="filled-in chk-col-light-blue">
+                            <label for="checkbox-signup"> I agree to all <a href="javascript:void(0)">Terms</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center p-b-20">
+                    <div class="col-xs-12">
+                        <a [routerLink]="['/login']" class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light">Sign Up</a>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        Already have an account? <a class="text-info m-l-5" [routerLink]="['/login']"><b>Sign In</b></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ -->

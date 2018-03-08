@@ -1,0 +1,106 @@
+/* Payment Method (Accordion) */
+.panel{margin-bottom: 20px !important;}
+.payment-method .panel-heading{position: relative;}
+/*.payment-method .panel-title{width: calc(100% - 150px);}*/
+.payment-method .panel-title{width: 100%;}
+.payment-method input[type="radio"] + label{padding-left: 40px;font-size: 14px;font-weight: 600;width: 100%;}
+.payment-method input[type="radio"] + label span{display: block;line-height: 1.5;color:#B7B7B7;font-size: 12px;font-weight: normal;margin-top: 5px;}
+.payment-method .panel-body{padding-left: 40px !important;}
+
+/* Credit Card Logos */
+.payment-method .payment-logos{position: absolute;top:0;right:0;pointer-events: none;}
+.payment-method .payment-logos img{margin-left: 3px;display: inline-block;height: 20px}
+.payment-method .payment-logos img:first-child{margin-left: 0;}
+
+/* Payment Method (Tabs) */
+ul.payment-tabs{border-bottom:none;}
+ul.payment-tabs li img{height: 22px !important;width: auto !important;}
+ul.payment-tabs > li.nav-item{width: calc(50% - 10px)}
+ul.payment-tabs > li.nav-item:first-child{margin-right: 20px;}
+ul.payment-tabs > li.nav-item a{border:1px solid #DDDDDD !important;width: 100%;color: #444444 !important;font-weight:normal;font-size: 14px;padding-left: 20px;border-radius:7px;background-color: transparent !important;display: relative}
+ul.payment-tabs > li.nav-item a:not(.active):hover{background-color: #EEE !important}
+ul.payment-tabs > li.nav-item a.active{border-color:#5494DF !important;background-color: #EFFCFE !important}
+ul.payment-tabs > li.nav-item a:before{content:'';border:2px solid #CCCCCC;border-radius:100px;width: 16px;height: 16px;display: inline-block;margin-bottom: -3px; margin-right: 8px;background-color: #fff}
+ul.payment-tabs > li.nav-item a.active:before{border-color:#5494DF}
+ul.payment-tabs > li.nav-item a.active:after{content:'';display: block;position: absolute;background-color: #5494DF;height: 8px;width: 8px;left: 24px;top:21px;border-radius:100px}
+
+.payment-tab-content{padding-top: 30px;}
+
+
+/* Credit Card Form */
+.card-form label{margin-bottom: 0;font-size: 12px;text-transform: uppercase;margin-bottom: 5px;}
+.card-form input{margin-bottom: 20px;}
+.check-card{margin-top: 10px;}
+.check-card label{font-size: 14px;}
+.card_logos{position: relative;}
+.card_logos img[class*="card_"]{position: absolute;top:9px;right: 10px;display: none;}
+
+button.center{padding:12px 25px ;font-size: 14px;}
+
+/* Place Order Button */
+button.place-order{width: 100%;padding: 20px 0 15px;font-size: 16px;font-weight: 600;text-transform: uppercase;letter-spacing: 2px;margin-bottom: 40px;margin-top: 20px;}
+button.place-order.disabled{pointer-events: none;opacity: .3;background-color: #AAAAAA;border:1px solid #AAAAAA}
+
+/* CC Tooltip */
+.tooltip_styled {display: inline;position: relative;z-index: 999;}
+.tooltip-content {position: absolute;z-index: 9999;width: 300px;left: 50%;margin: 0 0 20px -150px;bottom: 100%;text-align: left;line-height: 20px;display: block;padding: 15px;font-size: 12px;color: #fff;box-shadow: -5px -5px 15px rgba(48,54,61,0.2);background: #333;opacity: 0;cursor: default;pointer-events: none;}
+.tooltip-item{background-color: #CCC;color: #fff;padding: 3px 4px 3px 3px;width: 16px;height: 16px;border-radius: 10px;line-height: 1;display: inline-block;text-align: center;font-size: 12px;}
+.tooltip-item::after {content: '';position: absolute;width: 300px;height: 20px;bottom: 100%;left: 50%;pointer-events: none;-webkit-transform: translateX(-50%);transform: translateX(-50%);}
+.tooltip_styled:hover .tooltip-content {pointer-events: auto;opacity: 1;-webkit-transform: translate3d(0,0,0) rotate3d(0,0,0,0);transform: translate3d(0,0,0) rotate3d(0,0,0,0);}
+.tooltip-effect-4 .tooltip-content {-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;-webkit-transform: scale3d(0.7,0.3,1);transform: scale3d(0.7,0.3,1);-webkit-transition: opacity 0.2s, -webkit-transform 0.2s;transition: opacity 0.2s, transform 0.2s;}
+.tooltip-content.card_logos span img{width: auto;height: auto;margin-top: 0;margin-left: 0;}
+.tooltip-content.card_logos span.amex{display: none;}
+.tooltip-content.card_logos.is_amex span.others{display: none;}
+.tooltip-content.card_logos.is_amex span.amex{display: block;}
+.tooltip-content::after {content: '';top: 100%;left: 50%;border: solid transparent;height: 0;width: 0;position: absolute;pointer-events: none;border-color: transparent;border-top-color: #333;border-width: 10px;margin-left: -10px;}
+
+
+/**************************************************\
+(LG) Small Screens
+\**************************************************/
+@media screen and (min-width: 992px) and (max-width:1199px){
+}
+
+
+/**************************************************\
+(MD+) Tablet and above
+\**************************************************/
+@media screen and (min-width: 768px){
+
+}
+
+/**************************************************\
+(MD) Tablet Only
+\**************************************************/
+@media screen and (min-width:768px) and (max-width: 991px){
+
+}
+
+/**************************************************\
+(MD-) Tablet and below
+\**************************************************/
+@media screen and (max-width: 991px){
+}
+
+
+/**************************************************\
+(SM-) Phone and below
+\**************************************************/
+@media screen and (max-width:767px){
+  .payment-method input[type="radio"] + label span{margin-top: 10px;width: calc(100% + 150px)}
+  .payment-logos{display: none;}
+
+
+  /* Payment Method Width */
+  ul.payment-tabs > li.nav-item{width: 100%;margin-bottom: 20px;}
+  ul.payment-tabs > li.nav-item:first-child{margin-right: 0px;}
+}
+
+/**************************************************\
+(XS) Phone and below
+\**************************************************/
+@media screen and (max-width:575px){
+  .payment-table .payment-icon{display: none;}
+  .payment-table .payment-desc{padding-left: 0;}
+  .payment-desc > span.text-green, .payment-desc > p > span.bold{display: block;margin-top: 5px;}
+}

@@ -1,0 +1,158 @@
+<div class="row hdr-nav-bar">
+  <div class="col-md-12">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="navbar-collapse" id="navbarText">
+        <div class="top-section">
+
+          <div class="row">
+
+            <!-- LDS Quick Actions -->
+            <div class="col-xl-4 offset-xl-2 col-lg-5 offset-lg-1 col-md-6 top-section-item">
+              <div class="table-div">
+                <div class="table-cell">
+                  <!-- Image -->
+                  <img src="assets/images/icon/icon-lds.png" alt="LDS Icon">
+                </div>
+                <div class="table-cell app-actions">
+                  <h1>LDS</h1>
+                  <p class="hidden-md-down">Logistic Delivery System</p>
+                  <p><a href="http://leeway-lds.s3-website-ap-southeast-1.amazonaws.com/" target="_blank">Go to LDS</a> <span class="dot-divider">&#9679;</span> <a routerLink="/add-accounts" [routerLinkActive]="['router-link-active']">Add Account</a></p><!-- In Add Account, check LDS checkbox -->
+                </div>
+              </div>
+            </div>
+
+            <!-- WMS Quick Actions -->
+            <div class="col-xl-4 col-lg-5 col-md-6 top-section-item">
+              <div class="table-div">
+                <div class="table-cell">
+                  <img src="assets/images/icon/icon-wms.png" class="greyscale-img" alt="WMS Icon">
+                </div>
+                <div class="table-cell app-actions">
+                  <!-- Image -->
+                  <h1>WMS</h1>
+                  <p class="hidden-md-down">Warehouse Management System</p>
+                  <p><a routerLink="/upgrade-plans" [routerLinkActive]="['router-link-active']">Add to subscription plan</a> <span class="dot-divider">&#9679;</span> <a href="" data-toggle="modal" data-target="#modalWMS">Start FREE trial now</a></p><!-- In Add Account, check LDS checkbox -->
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.row -->
+
+        </div><!-- /.top-section -->
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </div>
+</div>
+
+<div class="container-fluid r-aside">
+
+  <!-- Three column cards -->
+  <div class="row text-center row-eq-height">
+
+    <!-- TOTal accounts -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="table-container">
+            <div class="icon-container">
+              <i class="fa fa-user-circle-o"></i>
+            </div>
+            <div class="summary-container">
+              <h1 class="text-center full-width xl-font hidden-lg-up">{{totalaccounts}}</h1> <!-- Desktop & tablet display -->
+              <h3><span class="hidden-md-down">Total </span>Accounts</h3>
+              <h1 class="text-center full-width xl-font hidden-md-down">{{totalaccounts}}</h1><!-- Mobile display -->
+            </div>
+          </div>
+
+          <div class="content-container">
+            <p><a routerLink="/all-accounts" [routerLinkActive]="['router-link-active']">Manage Accounts</a> <!--<span class="dot-divider">&#9679;</span> <a routerLink="/activity-log" [routerLinkActive]="['router-link-active']">Activity Log</a></p>-->
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /.col-md-4 -->
+
+    <!-- TOTal devices -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="table-container">
+            <div class="icon-container">
+              <i class="fa fa-mobile"></i>
+            </div>
+            <div class="summary-container">
+              <h1 class="text-center full-width bold xl-font hidden-lg-up">{{totaldevices}}</h1> <!-- Desktop & tablet display -->
+              <h3><span class="hidden-md-down">Total </span>Devices</h3>
+              <h1 class="text-center full-width bold xl-font hidden-md-down">{{totaldevices}}</h1><!-- Mobile display -->
+            </div>
+          </div>
+
+          <div class="content-container">
+            <p><a routerLink="/all-devices" [routerLinkActive]="['router-link-active']">Manage Devices</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /.col-md-4 -->
+
+    <!-- Guides -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-container">
+            <div class="icon-container">
+              <i class="fa fa-book"></i>
+            </div>
+            <div class="summary-container">
+              <h3>Help &amp; Guides</h3>
+            </div>
+          </div>
+
+          <div class="content-container">
+            <p><a routerLink="/setting-lds">Setting up LDS</a></p>
+            <p><a routerLink="/setting-wms">Setting up WMS</a></p>
+            <p><a routerLink="/other">Others</a></p>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.col-md-4 -->
+  </div><!-- /.row -->
+
+
+  <!-- Modal WMS -->
+  <div class="modal fade" id="modalWMS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-angle-right"></i><i class="fa fa-angle-left"></i></button>
+          <div class="row">
+            <div class="col-lg-2 text-center">
+              <img src="assets/images/icon/icon-wms.png" class="max-width mb30" alt="WMS Icon">
+            </div>
+            <div class="col-lg-10">
+              <h2>Warehouse Delivery System (WMS)</h2>
+              <p class="mb30">Own a warehouse or huge inventory? Our WMS will help you organize your inventory efficiently and keep track on what’s going in &amp; out from your warehouse.</p>
+              <p><i class="fa fa-check text-green"></i>&nbsp; Manage loads going in and out</p>
+              <p><i class="fa fa-check text-green"></i>&nbsp; Item scanning support</p>
+              <p><i class="fa fa-check text-green"></i>&nbsp; Generate reports</p>
+            </div>
+            <div class="col-lg-8 offset-lg-2">
+              <div class="gap-md"></div>
+              <p class="text-center">At the end of the trial period you will require to upgrade your plan or remain at basic plan for free.</p>
+            </div>
+          </div>
+
+          <button class="btn btn-md capital btn-darkred center mt30 mb20 waves-effect waves-light">Start 30 days trial now</button>
+
+          <p class="text-center mb20">Trial will end on <span class="bold text-red">27 Dec 2017</span> if you start now</p>
+          <p class="text-center modal-exit mb0"><a href="" data-dismiss="modal">No thanks</a></p>
+
+          <!-- <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.container-fluid -->

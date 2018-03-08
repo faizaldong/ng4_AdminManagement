@@ -1,0 +1,216 @@
+<div class="container-fluid r-aside">
+
+  <!-- Full width column card -->
+  <div class="row">
+    <div class="col-md-12 p0-xs">
+
+      <!-- Desktop & Tablet View  -->
+      <!-- ============================================================== -->
+      <div class="card hidden-sm-down">
+        <div class="card-body">
+          <div class="d-flex no-block">
+            <h4 class="bold">Current Subscription Plan</h4>
+
+            <!-- Add Account -->
+            <div class="ml-auto d-none d-md-block">
+              <a routerLink="/order-history" [routerLinkActive]="['router-link-active']" class="btn waves-effect waves-light btn-lightgrey">Billing Receipt</a>
+            </div>
+          </div>
+
+          <table class="table subscription-table">
+            <tr>
+              <th>Services</th>
+              <th class="text-center">Auto Renewal</th>
+              <th class="text-right">Expiration</th>
+              <th></th>
+            </tr>
+
+            <tr *ngFor="let plan of plans.application_registrations">
+              <td>
+                <img src="assets/images/icon/icon-{{plan.name|lowercase}}.png" alt="{{plan.name}}">
+                <p>{{plan.full_name}}</p>
+                <p class="text-uppercase"><span class="plan-type">{{plans.id==plan.id? plans.plan_name:''}}</span></p> {{plans.id==plan.id? plans.plan_frequency.name:''}}
+              </td>
+              <td class="text-center">
+                <div class="switch"><label><input type="checkbox" [checked]="true"><span class="lever switch-col-light-green"></span></label></div>
+              </td>
+              <td class="text-right">
+                None
+              </td>
+              <td>
+                <a routerLink="/upgrade-plans" [routerLinkActive]="['router-link-active']" class="btn btn-outline-green waves-effect waves-light">Upgrade</a>
+              </td>
+            </tr>
+
+            <!-- <tr>
+              <td>
+                <img src="assets/images/icon/icon-lds.png" alt="LDS">
+                <p>Logistics Delivery System (LDS)</p>
+                <p class="text-uppercase"><span class="plan-type">Basic Plan</span></p>
+              </td>
+              <td class="text-center">
+                N/A
+              </td>
+              <td class="text-right">
+                None
+              </td>
+              <td>
+                <a routerLink="/upgrade-plans" [routerLinkActive]="['router-link-active']" class="btn btn-outline-green waves-effect waves-light">Upgrade</a>
+              </td>
+            </tr> -->
+            <!-- LDS Extension Apptimice -->
+            <!-- <tr class="app-extension">
+              <td>
+                <img src="assets/images/icon/icon-extension.png" alt="Extension">
+                <p>Extension : <span class="plan-type">Apptimice</span></p>
+              </td>
+              <td class="text-center">
+                <input type="checkbox" data-toggle="toggle">
+              </td>
+              <td class="text-right">
+                <p class="text-danger bold">31 Nov 2017</p>
+                <p class="text-danger">in 30 days</p>
+              </td>
+              <td>
+                <a routerLink="/upgrade-plans" [routerLinkActive]="['router-link-active']" class="btn btn-green waves-effect waves-light">Renew</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="assets/images/icon/icon-wms.png" alt="WMS">
+                <p>Warehouse Management System (WMS)</p>
+                <p class="text-uppercase"><span class="plan-type">Standard Plan</span></p>
+              </td>
+              <td class="text-center">
+                <input type="checkbox" checked data-toggle="toggle">
+              </td>
+              <td class="text-right">
+                <p class="bold">7 Dec 2017</p>
+                <p>in 72 days</p>
+              </td>
+              <td>
+                <a routerLink="/upgrade-plans" [routerLinkActive]="['router-link-active']" class="btn btn-outline-green waves-effect waves-light">Upgrade</a>
+              </td>
+            </tr> -->
+
+          </table>
+
+
+        </div>
+      </div>
+
+      <!-- Mobile View  -->
+      <!-- ============================================================== -->
+      <div class="hidden-md-up">
+
+        <div class="card">
+          <div class="card-body subscription-card" *ngFor="let plan of plans.application_registrations">
+            <div class="row">
+              <div class="col-12">
+                <img src="assets/images/icon/icon-{{plan.name|lowercase}}.png" alt="{{plan.name}}">
+                <p>{{plan.full_name}}</p>
+                <p class="text-uppercase"><span class="plan-type">{{plans.id==plan.id? plans.plan_name:''}}</span></p> {{plans.id==plan.id? plans.plan_frequency.name:''}}
+              </div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><div class="gap-sm"></div><p class="bold">Auto Renew</p></div>
+              <div class="col-6 text-right"><div class="switch"><label><input type="checkbox" [checked]="true"><span class="lever switch-col-light-green"></span></label></div></div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><p class="bold">Expiration</p></div>
+              <div class="col-6 text-right"><p>None</p></div>
+            </div>
+            <div class="row mt30 mb20">
+              <div class="col-12">
+                <a routerLink="/upgrade-plans" [routerLinkActive]="['router-link-active']" class="btn btn-outline-green waves-effect waves-dark">Upgrade</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LDS -->
+        <!-- <div class="card">
+          <div class="card-body subscription-card">
+            <div class="row">
+              <div class="col-12">
+                <img src="assets/images/icon/icon-lds.png" alt="LDS">
+                <p>Logistics Delivery System</p>
+                <p class="text-uppercase"><span class="plan-type">Basic Plan</span></p>
+              </div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><p class="bold">Auto Renew</p></div>
+              <div class="col-6 text-right"><p>N/A</p></div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><p class="bold">Expiration</p></div>
+              <div class="col-6 text-right"><p>None</p></div>
+            </div>
+            <div class="row mt30 mb20">
+              <div class="col-12">
+                <a href="plan.php" class="btn btn-outline-green waves-effect waves-dark">Upgrade</a>
+              </div>
+            </div>
+          </div> -->
+          <!-- Extension : Apptimice -->
+          <!-- <div class="card-body subscription-card">
+            <div class="row">
+              <div class="col-12">
+                <img src="assets/images/icon/icon-extension.png" alt="LDS">
+                <p>LDS Extension:</p>
+                <p><span class="plan-type">Apptimice</span></p>
+              </div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><div class="gap-sm"></div><p class="bold">Auto Renew</p></div>
+              <div class="col-6 text-right"><input type="checkbox" data-toggle="toggle"></div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><p class="bold">Expiration</p></div>
+              <div class="col-6 text-right"><p class="text-danger">31 Nov 2017</p></div>
+            </div>
+            <div class="row mt30 mb20">
+              <div class="col-12">
+                <a href="plan.php" class="btn btn-green waves-effect waves-dark">Renew</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- WMS -->
+        <!-- <div class="card">
+          <div class="card-body subscription-card">
+            <div class="row">
+              <div class="col-12">
+                <img src="assets/images/icon/icon-wms.png" alt="LDS">
+                <p>Warehouse Management System</p>
+                <p class="text-uppercase"><span class="plan-type">Standard Plan</span></p>
+              </div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><div class="gap-sm"></div><p class="bold">Auto Renew</p></div>
+              <div class="col-6 text-right"><input type="checkbox" data-toggle="toggle" checked></div>
+            </div>
+            <div class="row mt20">
+              <div class="col-6"><p class="bold">Expiration</p></div>
+              <div class="col-6 text-right"><p>7 Dec 2017</p></div>
+            </div>
+            <div class="row mt30 mb20">
+              <div class="col-12">
+                <a href="plan.php" class="btn btn-outline-green waves-effect waves-dark">Upgrade</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div><!-- /.hidden-md-up -->
+
+
+    </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+
+</div><!-- /.container-fluid -->
+
+<!-- All JS & jQuery -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>

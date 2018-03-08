@@ -1,0 +1,239 @@
+<div class="container-fluid r-aside">
+
+
+  <!-- Full width column card -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- <div class="d-flex no-block"> -->
+          <div class="row mt20 filters">
+            <div class="col-lg-5 tablet-filter">
+              <h4 class="bold">List of available devices</h4>
+            </div>
+            <div class="col-lg-7" align="right">
+              <button *ngIf="havepermadd" class="btn btn-success" (click)="addDevice()"><i class="fa fa-plus"></i> Device</button>
+              <button class="btn btn-grey" (click)="unbannedmultiple()"><i class="fa fa-unlock"></i> Devices</button>
+            </div>
+          </div>
+          <ngb-alert *ngIf="deviceshowalert" type="{{devicetotalalert.type}}" (click)="closeAlertLogin()">{{devicetotalalert.message}}</ngb-alert>
+
+          <!-- Filters -->
+          <div class="row mt20 filters">
+            <div class="col-lg-5 tablet-filter">
+              <div class="gap-sm hidden-md-up"></div>
+              <span class="mr5">Search : </span>
+              <span class="search-container"><input class="input-search" type="text" placeholder="device or user" (input)="searchData($event.target.value)"></span>
+            </div>
+            <div class="col-lg-7" align="right">
+              <h5> Active slots allowed: <b>{{deviceallow}}</b></h5>
+            </div>
+          </div>
+
+
+          <!-- Dengan penuh harapan, saya harap element ini dapat masuk html ni dlm table TD kendo -->
+          <!--
+          /)
+          //
+          __*_             //
+          /-(____)           //
+          ////0 0|\          //
+          ,_/// \ w/|\_        //
+          /  \\   |||  ;       //
+          /____\....::./\      //
+          _/__/#\_ _,,_/__\    //
+          /___/#########\/""-(\</
+          /__/ '######### ""^(/</
+          /__/   ,)))=:= (,   //.
+          ,__\   /Q...... /.  (/
+          .Q....../..\
+          /.Q ..../...\
+          /......./.....\
+          /...../  \.....\
+          /_.._./   \..._\
+          (` )      (` )
+          | /        \ |
+          '(          )'
+          /+|          |+\
+          |,/          \,/
+        -->
+
+        <!-- Table HTML elements -->
+        <div class="kendo-table mt20"><!-- WAJIB -->
+          <!--<table class="table table-striped">Can ignore
+            <tr>
+              <th>Device ID</th>
+              <th>Device Type</th>
+              <th>Current User</th>
+              <th>Last Logged In</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <tr>
+              <td>C38PCFW0G5MR</td>
+              <td><i class="fa fa-apple"></i> &nbsp; Apple iPhone X</td>
+              <td><a href="#" class="bold">John Dowh</a></td> click, edit account
+              <td>Fri, 03 Nov 2016, 10:00 PM</td>
+              <td><span class="status-active">&#9679;</span> Active</td>
+              <td class="kendo-action">WAJIB
+                <button class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Disable Device"><i class="fa fa-power-off"></i></button>
+                <button class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Device"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+
+             Disabled state. Only have "disabled" class. The rest are just the same
+             <tr class="row-disabled">
+              <td>RV8H61BT16R</td>
+              <td><i class="fa fa-android"></i> &nbsp; Samsung Galaxy Note 6</td>
+              <td><a href="#" class="bold">Edwin Leong</a></td> click, edit account
+              <td>Wed, 01 Nov 2017, 09:35 AM</td>
+              <td><span class="status-disabled">&#9679;</span> Disabled</td>
+              <td class="kendo-action">WAJIB
+                <button class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Activate Device"><i class="fa fa-power-off"></i></button>
+                <button class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Device"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+          </table> -->
+          <kendo-grid 
+            [kendoGridBinding]="device" 
+            [pageSize]="10"
+            [pageable]="true" 
+            [sortable]="true" 
+            [filter]="filter"
+            [skip]=0
+            filterable="menu" 
+            [groupable]="false" 
+            [height]="510"
+            [selectable]="{enabled: true, checkboxOnly: true }"
+            (pageChange)="pageChange($event)"
+            [kendoGridSelectBy]="'id'"
+            [selectedKeys]="mySelection"
+            (selectedKeysChange)="onSelectedKeysChange($event)"
+            >
+            <!-- <kendo-grid-checkbox-column showSelectAll="true" (selectedKeysChange)="selectedKeysChange($event)" width="40"></kendo-grid-checkbox-column> -->
+            <kendo-grid-checkbox-column width="40">
+                <ng-template kendoGridHeaderTemplate>
+                    <input class="k-checkbox" id="selectAllCheckboxId" kendoGridSelectAllCheckbox
+                        [state]="selectAllState"
+                        (selectAllChange)="onSelectAllChange($event)">
+                    <label class="k-checkbox-label" for="selectAllCheckboxId"></label>
+                </ng-template>
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column field="device_id1" title="Device Id">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <label *ngIf="!havepermshow||(dataItem.is_banned||(!dataItem.is_banned&&!dataItem.is_active))">{{dataItem.device_id}}--{{dataItem.id}}</label>
+                <a *ngIf="havepermshow&&!dataItem.is_banned" (click)="editDevice(dataItem.id)" title="Edit Device"><font color="#99CCFF">{{dataItem.device_id}}</font></a>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="device_manufacturer" title="Device Type" filterable="false">
+                <ng-template kendoGridCellTemplate let-dataItem><i class="fa" [ngClass]="{'fa-apple': dataItem.device_platform=='iOS', 'fa-android': dataItem.device_platform=='Android'}"></i> &nbsp; <!-- {{dataItem.device_platform?dataItem.device_platform: ''}} --> 
+                  <span class="capitalize">{{dataItem.device_manufacturer?dataItem.device_manufacturer: ''}} {{dataItem.device_model? dataItem.device_model: ''}}</span>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="current_worker" title="Current User">
+              <ng-template kendoGridCellTemplate let-dataItem>{{dataItem.current_worker?dataItem.current_worker.first_name: ''}}</ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="current_worker.last_seen" title="Last Logged" filterable="false" >
+              <ng-template kendoGridCellTemplate let-dataItem>{{dataItem.current_worker? (dataItem.current_worker.last_seen | date: 'dd MMMM yyyy'): ''}}</ng-template>
+            </kendo-grid-column>
+            <!-- <kendo-grid-column field="is_active" title="Status">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <span [class.status-active]="!dataItem.is_banned&&dataItem.is_active" [class.status-disabled]="!dataItem.is_banned&&!dataItem.is_active">&#9679;</span> {{dataItem.is_banned? 'Banned': ''}} {{(dataItem.is_banned==false&&dataItem.is_active)? 'Active': ''}} {{(dataItem.is_banned==false&&dataItem.is_active==false)? 'Disabled': ''}}
+              </ng-template>
+            </kendo-grid-column> -->
+            <kendo-grid-column field="id" title="Actions" class="kendo-action">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <button *ngIf="dataItem.is_banned" class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Unbanned" (click)="status(dataItem)">
+                  <i class="fa fa-unlock"></i>
+                </button>
+                <button *ngIf="!dataItem.is_banned&&dataItem.is_active" class="btn btn-green waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Disabled" (click)="status(dataItem)">
+                  <i class="fa fa-power-off"></i>
+                </button>
+                <button *ngIf="!dataItem.is_banned&&!dataItem.is_active" class="btn btn-red waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Activate" (click)="status(dataItem)">
+                  <i class="fa fa-power-off"></i>
+                </button>
+                <button *ngIf="havepermdelete" class="btn btn-grey waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Remove Device" data-toggle="modal" data-target="#deleteModal" (click)="deleteModal(dataItem)"><i class="fa fa-trash-o"></i></button>
+              </ng-template>
+            </kendo-grid-column>
+          </kendo-grid>
+
+        </div>
+      </div>
+    </div>
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body duplicate-role-table">
+        <table class="table selection-table table-striped table-bordered table-condensed mb0">
+          <tr>
+            <th>Device Id</th>
+            <th>Device User</th>
+            <th>Last Logged</th>
+          </tr>
+          <tr>
+            <td>{{deviceownid}}</td>
+            <td>{{deviceuser}}</td>
+            <td>{{deviceuserlastseen | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal">Close</button>
+        <button type="button" class="btn waves-effect waves-light btn-red" (click)="deleteDevice()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="unbannedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-lg  modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Unbanned Device</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body duplicate-role-table">
+          <div class="has-warning"><span class="form-control-feedback">{{unbannedtext}}</span></div>
+          <table class="table selection-table table-striped table-bordered table-condensed mb0">
+            <tr>
+              <th></th>
+              <th>Device Id</th>
+              <th>Current User</th>
+              <th>Last Logged</th>
+              <th>Status</th>
+            </tr>
+            <tr *ngFor="let phone of foundadminunbanned">
+              <td *ngIf="phone.is_banned==false"><input [disabled]="idfordelete.length==cboxrestrict&&phone.checked==false" type="checkbox" id="{{phone.id}}" class="chk-col-red" value="{{phone.checked}}" [checked]="phone.checked" (change)="cboxdeletedeviceforunbanned(phone, $event.target.getAttribute('value'))" /><label for="{{phone.id}}"></label><!-- [cboxlength:{{idfordelete.length}}] [restrict:{{cboxrestrict}}] [checked:{{phone.checked}}] --></td>
+              <td *ngIf="phone.is_banned==false">{{phone.device_id}}</td>
+              <td *ngIf="phone.is_banned==false">{{phone.current_worker?phone.current_worker.first_name: ''}}</td>
+              <td *ngIf="phone.is_banned==false">{{phone.current_worker? (phone.current_worker.last_seen | date: 'dd/MM/yyyy hh:mm:ss'): ''}}</td>
+              <td *ngIf="phone.is_banned==false">{{phone.is_active? 'Active': 'Disabled'}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn waves-effect waves-light btn-grey" (click)="closemodalunbanned()">Close</button>
+          <button type="button" class="btn waves-effect waves-light btn-green" (click)="unbannedphone()">Unbanned</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div><!-- /.container-fluid -->
+<!-- ============================================================== -->
+<!-- VIEW ENDS HERE -->
+<!-- ============================================================== -->

@@ -1,0 +1,316 @@
+<div class="container-fluid r-aside">
+  
+  <ngb-alert *ngIf="showRoleAlert" type="{{roleAlert.type}}" (click)="closeAlertRole()">{{roleAlert.message}}</ngb-alert>
+  <!-- Role Title -->
+  <div class="row mb30 mt10">
+    <div class="col-12">
+      <p>Role Title</p>
+    </div>
+    <div class="col-12">
+      <input type="text" name="" class="form-control form-role" placeholder="required" [(ngModel)]="roles.name">
+      <span class="d-inline-block role">or</span>
+      <button type="button" name="button" class="btn btn-outline-darkgrey" data-toggle="modal" data-target="#duplicateRole">Duplicate from...</button>
+    </div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- Roles -->
+  <h3 class="semibold mb20">Role Permissions</h3>
+
+  <!-- Tab Menu -->
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav" id="tab" role="tablist">
+        <!-- dev -->
+        <li class="nav-item" *ngFor="let service of rolepermission">
+          <input id="check_{{service.application_registration.name| lowercase}}" type="checkbox" class="filled-in chk-col-grey grandparent-check" [checked]="service.selected" [value]="service.selected" (change)="selectdeselectAllBox(service.application_registration, $event.target.getAttribute('value'))">
+          <label for="check_{{service.application_registration.name| lowercase}}"></label>
+          <a data-target="#{{service.application_registration.name| lowercase}}" data-toggle="tab" role="tab" aria-controls="" aria-selected="true" class="nav-link active" [class.active]="service.application_registration.name==listpermissionArray.application_registration.name" (click)="listdownAllPermissions(service.application_registration.name)">
+            <img src="assets/images/icon/icon-{{service.application_registration.name| lowercase}}.png" alt=""> {{service.application_registration.name=='AUTH'?'ADMIN':service.application_registration.name}}
+          </a>
+        </li>
+      <!--   <li class="nav-item">
+          <input id="check_lds" type="checkbox" class="filled-in chk-col-grey grandparent-check" (change)="selectAll()">
+          <label for="check_lds"></label>
+          <a data-target="#lds" data-toggle="tab" role="tab" aria-controls="" aria-selected="true" class="nav-link active">
+            <img src="assets/images/icon/icon-lds.png" alt=""> LDS
+          </a>
+        </li>
+        <li class="nav-item">
+          <input id="check_wms" type="checkbox" class="filled-in chk-col-grey grandparent-check">
+          <label for="check_wms"></label>
+          <a data-target="#wms" data-toggle="tab" role="tab" aria-controls="" aria-selected="false" class="nav-link">
+            <img src="assets/images/icon/icon-wms.png" alt=""> WMS
+          </a>
+        </li>
+        <li class="nav-item">
+          <input id="check_admin" type="checkbox" class="filled-in chk-col-grey grandparent-check">
+          <label for="check_admin"></label>
+          <a data-target="#admin" data-toggle="tab" role="tab" aria-controls="" aria-selected="false" class="nav-link">
+            <img src="assets/images/icon/icon-auth.png" alt=""> Admin
+          </a>
+        </li> -->
+      </ul>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="col-md-12 tab-content-container">
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content" id="tabContent">
+
+            <!-- LDS Content -->
+            <div class="tab-pane fade show active" id="lds" role="tabpanel" aria-labelledby="lds-tab">
+              <!-- dev -->
+              <div class="subcontent mt30" *ngFor="let permissiongroup of listpermissionArray.permissions">
+                <div class="subcontent-header">
+                  <input id="{{permissiongroup.name|lowercase}}_transport" type="checkbox" class="filled-in chk-col-grey parent-check" [checked]="permissiongroup.selected" [value]="permissiongroup.selected" (change)="selectdeselectGroupBox(permissiongroup, $event.target.getAttribute('value'))">
+                  <label for="{{permissiongroup.name|lowercase}}_transport" class="semibold">{{permissiongroup.name}}</label>
+                </div>
+                <div class="subcontent-content">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let permissionlist of permissiongroup.permissions">
+                      <input id="{{permissionlist.name|lowercase}}_transport_transport" type="checkbox" class="filled-in chk-col-grey child-check" [checked]="permissionlist.selected" [value]="permissionlist.selected" (change)="selectdeselectBox(permissionlist, $event.target.getAttribute('value'))">
+                      <label for="{{permissionlist.name|lowercase}}_transport_transport">{{permissionlist.name}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- LDS : Transport -->
+              <!-- <div class="subcontent">
+                <div class="subcontent-header">
+                  <input id="lds_transport" type="checkbox" class="filled-in chk-col-grey parent-check">
+                  <label for="lds_transport" class="semibold">Transport</label>
+                </div>
+                <div class="subcontent-content">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_transport_transport" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_transport_transport">Transport</label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- LDS : Job Order List -->
+              <!-- <div class="subcontent mt30">
+                <div class="subcontent-header">
+                  <input id="lds_joblist" type="checkbox" class="filled-in chk-col-grey parent-check">
+                  <label for="lds_joblist" class="semibold">Job Order List</label>
+                </div>
+                <div class="subcontent-content">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_description" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_description">Job Description</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_deliveryTime" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_deliveryTime">Delivery Time</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_actions" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_actions">Actions</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_do" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_do">Delivery Order (DO)</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_address" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_address">Address</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_status" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_status">Status</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_company" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_company">Company</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_driver" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_driver">Driver</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_description" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_description">Other Driver</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_accounting" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_accounting">Accounting</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_joblist_manpower" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_joblist_manpower">Manpower</label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- LDS : Customers -->
+              <!-- <div class="subcontent mt30">
+                <div class="subcontent-header">
+                  <input id="lds_customers" type="checkbox" class="filled-in chk-col-grey parent-check">
+                  <label for="lds_customers" class="semibold">Customers</label>
+                </div>
+                <div class="subcontent-content">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_customer_list" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_customer_list">Customer List</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_customer_add" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_customer_add">Add Customer</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_customer_edit" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_customer_edit">Edit Customer</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_customer_view" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_customer_view">View Customer</label>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                      <input id="lds_customer_delete" type="checkbox" class="filled-in chk-col-grey child-check">
+                      <label for="lds_customer_delete">Delete Customer</label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+            </div>
+
+            <!-- WMS Content -->
+            <!-- <div class="tab-pane fade" id="wms" role="tabpanel" aria-labelledby="wms-tab">
+              WMS permissions here
+            </div> -->
+
+            <!-- Admin Content -->
+            <!-- <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+              Admin Panel permissions here
+            </div> -->
+
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-green btn-md  waves-effect waves-light" (click)="createRole()" [disabled]="createDisable">Create Role</button>
+    </div><!-- /.col-md-12 -->
+  </div><!-- /.row -->
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="duplicateRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Duplicate role from...</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body duplicate-role-table">
+          <table class="table selection-table table-striped table-bordered mb0">
+            <tr>
+              <th>Role Name</th>
+              <th>Services</th>
+            </tr>
+          </table>
+          <div class="table-overflow-container">
+            <table class="table selection-table table-striped table-bordered table-condensed mb0">
+              <tr *ngFor="let dup of duplicaterolelisting">
+                <td>
+                  <input type="radio" name="duplicate" id="{{dup.role_name}}" class="with-gap radio-col-light-blue" (change)="duplicateradio(dup)">
+                  <label for="{{dup.role_name}}">{{dup.role_name}}</label>
+                </td>
+                <td><img *ngFor="let service of dup.role_services" src="assets/images/icon/icon-{{service.name| lowercase}}.png" alt="{{service.name}}"></td>
+              </tr>
+              <!-- <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="subAdmin" class="with-gap radio-col-light-blue">
+                  <label for="subAdmin">Sub Admin</label>
+                </td>
+                <td><img src="assets/images/icon/icon-lds.png" alt="LDS"><img src="assets/images/icon/icon-wms.png" alt="WMS"><img src="assets/images/icon/icon-auth.png" alt="Admin Panel"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="miniAdmin" class="with-gap radio-col-light-blue">
+                  <label for="miniAdmin">Mini Admin</label>
+                </td>
+                <td><img src="assets/images/icon/icon-lds.png" alt="LDS"><img src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="ldsAdmin" class="with-gap radio-col-light-blue">
+                  <label for="ldsAdmin">LDS Admin</label>
+                </td>
+                <td><img src="assets/images/icon/icon-lds.png" alt="LDS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="ldsSpectator" class="with-gap radio-col-light-blue">
+                  <label for="ldsSpectator">LDS Spectator</label>
+                </td>
+                <td><img src="assets/images/icon/icon-lds.png" alt="LDS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="ldsAccounting" class="with-gap radio-col-light-blue">
+                  <label for="ldsAccounting">LDS Accounting</label>
+                </td>
+                <td><img src="assets/images/icon/icon-lds.png" alt="LDS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="ldsDriver" class="with-gap radio-col-light-blue">
+                  <label for="ldsDriver">LDS Driver</label>
+                </td>
+                <td><img src="assets/images/icon/icon-lds.png" alt="LDS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="wmsAdmin" class="with-gap radio-col-light-blue">
+                  <label for="wmsAdmin">WMS Admin</label>
+                </td>
+                <td><img src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="wmsSpectator" class="with-gap radio-col-light-blue">
+                  <label for="wmsSpectator">WMS Spectator</label>
+                </td>
+                <td><img src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="wmsAccounting" class="with-gap radio-col-light-blue">
+                  <label for="wmsAccounting">WMS Accounting</label>
+                </td>
+                <td><img src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="radio" name="duplicate" id="wmsWarehouseManager" class="with-gap radio-col-light-blue">
+                  <label for="wmsWarehouseManager">WMS Warehouse Manager</label>
+                </td>
+                <td><img src="assets/images/icon/icon-wms.png" alt="WMS"></td>
+              </tr> -->
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn waves-effect waves-light btn-grey" data-dismiss="modal" (click)="isnoduplicate()">Cancel Duplicate</button>
+          <button type="button" class="btn waves-effect waves-light btn-green" data-dismiss="modal" (click)="isduplicate()">Duplicate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div><!-- /.container-fluid -->

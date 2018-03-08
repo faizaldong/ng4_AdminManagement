@@ -1,0 +1,114 @@
+.page-wrapper{padding-bottom: 65px;}
+
+.subscription-table{margin-top: 20px;}
+.subscription-table tr th{border-bottom:2px solid #3E5370;border-top: 2px solid #3E5370}
+.subscription-table tr td{vertical-align: middle;height: 81px}
+.subscription-table tr td img{width: 50px;position: absolute;left: 0;top:12px;}
+.subscription-card img{width: 50px;height: 50px;float: left;margin-right: 20px;}
+.subscription-table tr td p, .subscription-card p{margin: 0;line-height: 1.4}
+
+.subscription-table tr th:first-child,
+.subscription-table tr td:first-child{padding-left: 0;;position: relative;}
+.subscription-table tr th:last-child,
+.subscription-table tr td:last-child{padding-right: 0;position: relative;}
+.subscription-table tr td:first-child{padding-left: 65px;}
+
+.subscription-table tr.app-extension td{border-top:none}
+.plan-type{font-weight: bold;color: #5494DF}
+
+.subscription-card{border-top:1px solid #e9ecef}
+.subscription-card:first-child{border-top:none}
+
+.checkout-bar{position: fixed;bottom: 0;right: 0;background: #fff;overflow:hidden;width: 100%;padding-top: 15px;padding-bottom: 15px;z-index:10;-webkit-box-shadow: 0 -2px 5px 0 rgba(0,0,0,.2);box-shadow: 0 -2px 5px 0 rgba(0,0,0,.2);}
+.checkout-bar span.d-inline-block{margin-right: 10px;position: relative;bottom: -2px}
+
+ul.nav.nav-pills{border:1px solid #5494DF}
+ul.nav.nav-pills > li.nav-item > a{padding:8px 25px;font-weight: normal;font-size: 14px;color: #5494DF;margin-right: 0;border-radius: 0;background: transparent;min-width: 110px;text-align: center;}
+ul.nav.nav-pills > li.nav-item > a.active{background-color: #5494DF;color: #fff}
+ul.nav.nav-pills > li.nav-item > a:not(.active):hover{background-color: #E4F0FF}
+
+/* Upgrade Plan Page */
+h2.plan-title{font-weight: 300;}
+h2.plan-title img{width: 55px;margin-right: 10px;}
+
+/* Pricing Column */
+.pricing-column{border:1px solid #DADADA;border-radius:5px;overflow:hidden;text-align: center;margin-bottom: 30px; position:relative; }
+.pricing-column-content{border-top:#5494DF solid 5px;padding:30px 10px 25px 10px;}
+.pricing-column-content.popular{border-top:#46CC58 solid 5px}
+.pricing-column-content h5{text-transform: uppercase;font-weight: 600;letter-spacing: 2px}
+.pricing-column-content button{max-width: 100%;padding: 12px;width: 170px;font-size: 15px;}
+.pricing-column-content button.disabled{opacity: 0.3}
+.pricing-column-content .discount{font-size: 12px;color:#46CC58;margin-top: 0;}
+.pricing-column-content .price{font-size: 48px;color:#474747;font-family: 'Lato', sans-serif;margin-bottom: 0;line-height: 1.2}
+.pricing-column-content .price sup{font-size: 18px;color:#909090;top:-1em;}
+.pricing-column-content .price sub{font-size: 14px;color:#909090;bottom:0em;}
+.pricing-column-content p{margin-bottom: 15px;margin-top: 0;width:70%;margin-left: auto;margin-right: auto;}
+.pricing-column-content p.enterprise-p{margin-top: 55px;height:118px;margin-bottom: 0;}
+
+h3.extension-title{font-weight: 600;color:#545454;font-size: 24px;letter-spacing: 3.5px;margin-top: 20px;}
+
+/* Ribbon */
+.corner-ribbon{width: 200px;position: absolute;top: 25px;left: -50px;text-align: center;line-height: 30px;color: #f0f0f0;transform: rotate(-45deg);-webkit-transform: rotate(-45deg);text-transform: uppercase;letter-spacing: 2px;font-weight: 600;font-size: 11px;}
+.corner-ribbon.shadow{box-shadow: 0 0 3px rgba(0,0,0,.3);}
+.corner-ribbon.top-left{top: 25px;left: -60px;transform: rotate(-45deg);-webkit-transform: rotate(-45deg);}
+.corner-ribbon.top-right{top: 25px;right: -60px;left: auto;transform: rotate(45deg);-webkit-transform: rotate(45deg);}
+.corner-ribbon.black{background-color: #000}
+.corner-ribbon.popular{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fc9f35+16,fa3333+50,f10979+90 */
+background: #fc9f35; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #fc9f35 16%, #fa3333 50%, #f10979 90%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #fc9f35 16%,#fa3333 50%,#f10979 90%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #fc9f35 16%,#fa3333 50%,#f10979 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc9f35', endColorstr='#f10979',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */}
+
+/**************************************************\
+(LG) Small Screens
+\**************************************************/
+@media screen and (min-width: 992px) and (max-width:1199px){
+.pricing-column .pricing-column-content p{width: 100%}
+h3.extension-title{margin-top: 0px;}
+}
+
+
+/**************************************************\
+(MD+) Tablet and above
+\**************************************************/
+@media screen and (min-width: 768px){
+
+}
+
+/**************************************************\
+(MD) Tablet Only
+\**************************************************/
+@media screen and (min-width:768px) and (max-width: 991px){
+
+}
+
+/**************************************************\
+(MD-) Tablet and below
+\**************************************************/
+@media screen and (max-width: 991px){
+  h2.plan-title{text-align: center;margin-bottom: 40px;margin-top: 20px;}
+  .d-flex.no-block.nav-tabs-pills{display: block !important;}
+  ul.nav.nav-pills{width: 240px;margin-left: auto;margin-right: auto;}
+  ul.nav.nav-pills li{width: 50%}
+}
+
+
+/**************************************************\
+(SM-) Phone and below
+\**************************************************/
+@media screen and (max-width:767px){
+  .subscription-card p{font-size: 16px;}
+  .checkout-bar > div{text-align: center !important;}
+  .checkout-bar span{margin-bottom: 10px;}
+
+  .p0-xs{padding: 0 !important;}
+}
+
+/**************************************************\
+(XS) Phone and below
+\**************************************************/
+@media screen and (max-width:575px){
+  h2.plan-title{margin-bottom: 20px;}
+  h2.plan-title img{display: block;margin-right: auto;margin-bottom: 20px;margin-left: auto;width: 100px}
+}

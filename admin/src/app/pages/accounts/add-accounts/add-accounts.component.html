@@ -1,0 +1,107 @@
+<div class="form-container">
+  <!-- Image Uploader -->
+  <div class="row">
+    <div class="col-md-8 offset-md-4">
+      <img src="assets/images/users/default-grey.png" alt="">
+      <div class="gap"></div>
+    </div>
+  </div>
+
+  <!-- Name -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Name</label>
+    </div>
+    <div class="col-md-8" [ngClass]="{'has-warning': nameInvalid}">
+      <input type="text" class="form-control form-control-warning" placeholder="required" [(ngModel)]="admin.first_name">
+      <div class="form-control-feedback" *ngIf="nameInvalid">Sorry, name is required</div>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Email</label>
+    </div>
+    <div class="col-md-8" [ngClass]="{'has-warning': emailInvalid}">
+      <input type="email" class="form-control form-control-warning" placeholder="required" [(ngModel)]="admin.email">
+      <div class="form-control-feedback" *ngIf="emailInvalid">Sorry, email is required</div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Services</label>
+    </div>
+    <div class="mt10 col-md-8">
+      <div class="" *ngFor="let app of apps">
+        <input id="check_{{app.id}}" value="{{app.id}}" type="checkbox" class="filled-in chk-col-grey" (change)="appChose($event, app)">
+        <label for="check_{{app.id}}"><img src="assets/images/icon/icon-{{app.name| lowercase}}.png" alt="">{{app.full_name}}</label>
+      </div>
+      <div [ngClass]="{'has-warning': serviceInvalid}">
+        <label class="form-control-feedback" *ngIf="serviceInvalid">Sorry, please choose atleast one service</label>
+      </div>
+
+      <!-- <div class="mt10">
+        LDS Check
+        <input id="check_lds" type="checkbox" class="filled-in chk-col-grey">
+        <label for="check_lds"><img src="assets/images/icon/icon-lds.png" alt="">Logistic Delivery System (LDS)</label>
+      </div>
+      <div class="disabled">
+        WMS Check
+        <input id="check_wms" type="checkbox" class="filled-in chk-col-grey">
+        <label for="check_wms"><img src="assets/images/icon/icon-wms.png" alt="">Warehouse Management System (WMS)</label>
+      </div>
+      <div class="">
+        Admin Check
+        <input id="check_admin" type="checkbox" class="filled-in chk-col-grey">
+        <label for="check_admin"><img src="assets/images/icon/icon-admin.png" alt="">Admin Panel</label>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Role -->
+  <div class="row">
+    <div class="col-md-4 text-md-right">
+      <label for="">Role</label>
+    </div>
+    <div class="col-md-8">
+      <div [ngClass]="{'has-warning': roleInvalid}">
+        <select class="form-control" [(ngModel)]="admin.role_id" name="power" [disabled]="roleOptions">
+          <option value="">Choose applications above first</option>
+          <option *ngFor="let role of allroles" [value]="role.id">{{role.role_name}}</option>
+        </select>
+        <!-- <ng-select [disabled]="roleOptions" [options]="roles" placeholder="Choose applications above first" [allowClear]="true" [(ngModel)]="admin.role_id"></ng-select> -->
+        <label class="form-control-feedback" *ngIf="roleInvalid">Sorry, please choose atleast one service</label>
+      </div>
+      <p *ngIf="createrole" class="text-red text-danger mt10">Role not available for selected services(s). <a routerLink="/add-role" [routerLinkActive]="['router-link-active']" class="underline d-sm-inline-block d-block">Create new role</a></p>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="row">
+    <div class="col-md-4 text-md-right"></div>
+    <div class="col-md-8">
+      <button class="btn btn-green btn-md  waves-effect waves-light" (click)="createAccount()" [disabled]="createDisable">Create Account</button>
+      <div class="gap-sm"></div>
+      <p class="footnote">An email will be sent to this user about their account.</p>
+    </div>
+  </div>
+
+</div><!-- /.form-container -->
+
+<!-- IMPORTANT NOTES : can be declared globally as standby to use anytime without have to import one by one, waiting faizal to decide -->
+  <!-- JS Bootstrap Popper Core -->
+  <script src="assets/plugins/bootstrap/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- SlimScrollBar JS -->
+  <script src="assets/js/perfect-scrollbar.jquery.min.js"></script>
+  <!--Wave Effects -->
+  <script src="assets/js/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="assets/js/sidebarmenu.js"></script>
+  <!--Custom JavaScript -->
+  <script src="assets/js/custom.min.js"></script>
+  <!-- <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css"> -->
+  <!-- <script type="text/javascript" src="assets/plugins/select2/dist/js/select2.min.js"></script> -->

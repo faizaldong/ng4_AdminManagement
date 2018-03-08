@@ -1,0 +1,80 @@
+/* Top section App shortcuts styling */
+.table-div .table-cell{vertical-align: top;}
+.table-div .table-cell:nth-child(1){width:110px;}/* Image Block */
+.table-div .table-cell:nth-child(2){padding-left: 20px;}
+
+.top-section img{width:100%}
+.app-actions h1{font-weight: 300;color: #979797}
+.app-actions p{line-height: 1.6;color: #B4B4B4;margin-bottom: 6px;margin-left: 2px;}
+.app-actions a{display: inline-block;}
+
+/* 3 columns styling */
+.table-container{margin-top: 10px;}
+
+.icon-container > i{font-size: 72px;color: #BBB}
+.icon-container > i.fa-mobile{font-size: 80px;line-height: 0.9}
+
+.summary-container {margin: 24px 0}
+.summary-container > h3{color: #979797;margin-bottom: 17px;font-size: 24px;}
+.summary-container > h1{color: #545454;font-weight: 600;}
+
+.dot-divider{font-size: 12px;display: inline-block;margin:0 5px;position: relative;top:-1px;color: #67757c}
+
+.modal-body{padding: 45px;}
+.modal-body button:not(.close){padding: 13px 32px;}
+.modal-body p.modal-exit a{color: #777;text-decoration: underline;}
+.modal-body button.close{float: none;position: absolute;right: 30px;top:20px;width: 30px}
+.modal-body button.close i.fa{letter-spacing: -4px;font-size: 35px !important;}
+
+/**************************************************\
+(LG-) Small Monitor and below
+\**************************************************/
+@media screen and (max-width: 1199px){
+  .table-div .table-cell:nth-child(1){width:80px;}/* Image Block */
+}
+
+/**************************************************\
+(MD+) Tablet and above
+\**************************************************/
+@media screen and (min-width: 768px){
+  .row-eq-height .card-body{min-height: 323px;}
+}
+
+/**************************************************\
+(MD) Tablet Only
+\**************************************************/
+@media screen and (min-width:768px) and (max-width: 991px){
+  .app-actions h1{font-size: 24px;font-weight: bold;line-height: 1;color: #777}
+  .top-section > .row{padding-left: 9px;}
+}
+
+/**************************************************\
+(MD-) Tablet and below
+\**************************************************/
+@media screen and (max-width: 991px){
+  .content-container > p > a, .app-actions a{display: block;font-size: 16px;}
+  .dot-divider{display: none}
+  .modal-body h2{text-align: center;}
+}
+
+
+/**************************************************\
+(SM-) Phone and below
+\**************************************************/
+@media screen and (max-width:767px){
+  .app-actions h1{font-weight: 600;font-size: 22px;line-height: 1;color: #777}
+  .top-section-item{margin-top: 30px;}
+  .top-section-item:first-child{margin-top: 0;}
+
+  .icon-container > i{font-size: 50px}
+  .table-container{display: table;width: 100%;margin-bottom: 20px;}
+  .table-container > div{display: table-cell;vertical-align: middle;}
+  .table-container > .icon-container{width: 100px}
+  .table-container > .summary-container{padding-left: 10px;}
+  .table-container > .summary-container,
+  .table-container > .summary-container h1{text-align: left !important;font-size: 32px;margin-bottom: 0;}
+  .table-container > .summary-container h3{margin-bottom: 0;text-transform: uppercase;font-size: 20px;}
+
+  .content-container > p{margin-bottom: 5px;}
+  .content-container > p > a{text-align:left;}
+}
